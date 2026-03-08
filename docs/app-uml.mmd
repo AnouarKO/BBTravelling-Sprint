@@ -1,0 +1,125 @@
+classDiagram
+direction LR
+
+class SplashScreen {
+  +onFinished()
+}
+
+class MainShell {
+  +navigate(route:String)
+}
+
+class HomeScreen {
+  +trips: List~Trip~
+  +onTripClick(tripId:String)
+  +onOpenTrips()
+}
+
+class TripsScreen {
+  +trips: List~Trip~
+  +selectedFilter: Int
+  +filterBy(status:String)
+  +onTripClick(tripId:String)
+}
+
+class TripDetailScreen {
+  +tripId: String
+  +selectedTab: Int
+  +onOpenGallery()
+  +onBack()
+}
+
+class GalleryScreen {
+  +tripId: String
+  +photos: List~Photo~
+  +onAddPhotoClick()
+  +onDeletePhotoClick(photoId:String)
+  +onBack()
+}
+
+class SettingsScreen {
+  +onOpenPreferences()
+  +onOpenAbout()
+  +onOpenTerms()
+}
+
+class PreferencesScreen {
+  +selectedLanguage: String
+  +darkTheme: Boolean
+  +notifications: Boolean
+  +setLanguage(language:String)
+  +toggleTheme()
+  +toggleNotifications()
+}
+
+class AboutScreen {
+  +onOpenTerms()
+  +onBack()
+}
+
+class TermsScreen {
+  +onAccept()
+  +onReject()
+}
+
+class MockData {
+  +trips: List~Trip~
+  +tripById(id:String): Trip?
+  +allPhotos(): List~Photo~
+}
+
+class Trip {
+  +id:String
+  +title:String
+  +destination:String
+  +status:String
+  +startDate:String
+  +endDate:String
+  +summary:String
+  +accommodation:String
+  +transport:String
+  +travelers:Int
+  +budgetEur:Double
+  +activities:List~Activity~
+  +photos:List~Photo~
+  +spentEur:Double
+  +remainingEur:Double
+  +isOverBudget():Boolean
+  +averageActivityCost():Double
+  +projectedDailyBudget(totalDays:Int):Double
+}
+
+class Activity {
+  +time:String
+  +title:String
+  +location:String
+  +costEur:Double
+}
+
+class Photo {
+  +id:String
+  +title:String
+  +spot:String
+  +resId:Int
+}
+
+MainShell --> HomeScreen
+MainShell --> TripsScreen
+MainShell --> GalleryScreen
+MainShell --> SettingsScreen
+HomeScreen --> TripDetailScreen
+TripsScreen --> TripDetailScreen
+TripDetailScreen --> GalleryScreen
+SettingsScreen --> PreferencesScreen
+SettingsScreen --> AboutScreen
+SettingsScreen --> TermsScreen
+AboutScreen --> TermsScreen
+
+HomeScreen --> MockData
+TripsScreen --> MockData
+TripDetailScreen --> MockData
+GalleryScreen --> MockData
+
+MockData --> Trip
+Trip "1" *-- "0..*" Activity
+Trip "1" *-- "0..*" Photo

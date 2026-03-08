@@ -1,0 +1,18 @@
+flowchart TD
+    A[Splash] --> B[Main Shell]
+
+    subgraph MainTabs [Bottom Navigation]
+        B --> H[Home]
+        B --> TR[Trips]
+        B --> G[Gallery]
+        B --> S[Settings]
+    end
+
+    H --> TD[Trip Detail]
+    H --> TR
+    TR --> TD
+    TD --> TG[Trip Gallery]
+    S --> P[Preferences]
+    S --> AB[About]
+    S --> T[Terms & Conditions]
+    AB --> T

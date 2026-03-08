@@ -1,0 +1,38 @@
+classDiagram
+    class Trip {
+        +String id
+        +String title
+        +String destination
+        +String status
+        +String startDate
+        +String endDate
+        +String summary
+        +String accommodation
+        +String transport
+        +Int travelers
+        +Double budgetEur
+        +List~Activity~ activities
+        +List~Photo~ photos
+        +Double spentEur
+        +Double remainingEur
+        +Boolean isOverBudget()
+        +Double averageActivityCost()
+        +Double projectedDailyBudget(totalDays)
+    }
+
+    class Activity {
+        +String time
+        +String title
+        +String location
+        +Double costEur
+    }
+
+    class Photo {
+        +String id
+        +String title
+        +String spot
+        +Int resId
+    }
+
+    Trip "1" *-- "0..*" Activity : itinerary
+    Trip "1" *-- "0..*" Photo : gallery
