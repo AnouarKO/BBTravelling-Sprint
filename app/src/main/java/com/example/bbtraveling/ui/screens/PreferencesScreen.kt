@@ -56,6 +56,7 @@ import com.example.bbtraveling.ui.preview.previewSettingsViewModel
 import com.example.bbtraveling.ui.viewmodel.SettingsViewModel
 import java.time.Instant
 import java.time.LocalDate
+import java.time.Period
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import kotlinx.coroutines.launch
@@ -76,6 +77,8 @@ fun PreferencesScreen(
     val darkModeSavedMessage = stringResource(R.string.pref_dark_mode_saved)
     val usernameSavedMessage = stringResource(R.string.pref_username_saved)
     val dateOfBirthSavedMessage = stringResource(R.string.pref_date_of_birth_saved)
+    val dateOfBirthFutureError = stringResource(R.string.pref_date_of_birth_future_error)
+    val dateOfBirthMinAgeError = stringResource(R.string.pref_date_of_birth_min_age_error)
     var languageExpanded by remember { mutableStateOf(false) }
     var usernameDialogVisible by remember { mutableStateOf(false) }
     var birthDatePickerVisible by remember { mutableStateOf(false) }
@@ -215,10 +218,17 @@ fun PreferencesScreen(
             initialDate = settings.dateOfBirth.toLocalDateOrNull(),
             onDismiss = { birthDatePickerVisible = false },
             onConfirm = { selectedDate ->
-                settingsViewModel.updateDateOfBirth(selectedDate.format(PREFERENCE_DATE_FORMAT))
-                birthDatePickerVisible = false
-                scope.launch {
-                    snackbarHostState.showSnackbar(message = dateOfBirthSavedMessage)
+                val today = LocalDate.now()
+                when {
+                    selectedDate.isAfter(today) -> dateOfBirthFutureError
+                    Period.between(selectedDate, today).years < MINIMUM_AGE -> dateOfBirthMinAgeError
+                    else -> {
+                        settingsViewModel.updateDateOfBirth(selectedDate.format(PREFERENCE_DATE_FORMAT))
+                        scope.launch {
+                            snackbarHostState.showSnackbar(message = dateOfBirthSavedMessage)
+                        }
+                        null
+                    }
                 }
             }
         )
@@ -320,9 +330,10 @@ private fun UsernameDialog(
 private fun DateOfBirthDialog(
     initialDate: LocalDate?,
     onDismiss: () -> Unit,
-    onConfirm: (LocalDate) -> Unit
+    onConfirm: (LocalDate) -> String?
 ) {
     val datePickerState = rememberDatePickerState(initialSelectedDateMillis = initialDate.toEpochMillis())
+    var errorMessage by remember { mutableStateOf<String?>(null) }
 
     DatePickerDialog(
         onDismissRequest = onDismiss,
@@ -331,7 +342,12 @@ private fun DateOfBirthDialog(
                 onClick = {
                     val selected = datePickerState.selectedDateMillis?.toLocalDate()
                     if (selected != null) {
-                        onConfirm(selected)
+                        val saveError = onConfirm(selected)
+                        if (saveError != null) {
+                            errorMessage = saveError
+                        } else {
+                            onDismiss()
+                        }
                     } else {
                         onDismiss()
                     }
@@ -346,7 +362,18 @@ private fun DateOfBirthDialog(
             }
         }
     ) {
-        DatePicker(state = datePickerState)
+        Column {
+            DatePicker(state = datePickerState)
+            if (!errorMessage.isNullOrBlank()) {
+                Spacer(Modifier.height(8.dp))
+                Text(
+                    text = errorMessage.orEmpty(),
+                    modifier = Modifier.padding(horizontal = 24.dp),
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+        }
     }
 }
 
@@ -406,6 +433,7 @@ private fun Long.toLocalDate(): LocalDate {
 }
 
 private val PREFERENCE_DATE_FORMAT: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+private const val MINIMUM_AGE = 16
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
