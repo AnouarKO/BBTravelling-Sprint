@@ -1,8 +1,8 @@
-<resources>
+﻿<resources>
     <string name="app_name">BBTraveling</string>
     <string name="nav_home">Inicio</string>
     <string name="nav_trips">Viajes</string>
-    <string name="nav_gallery">Galería</string>
+    <string name="nav_gallery">GalerÃ­a</string>
     <string name="nav_settings">Ajustes</string>
 
     <string name="title_dashboard">Panel</string>
@@ -14,33 +14,33 @@
     <string name="title_preferences">Preferencias</string>
     <string name="title_settings">Ajustes</string>
     <string name="title_about">Acerca de</string>
-    <string name="title_terms">Términos y condiciones</string>
-    <string name="title_gallery">Galería</string>
+    <string name="title_terms">TÃ©rminos y condiciones</string>
+    <string name="title_gallery">GalerÃ­a</string>
 
     <string name="tab_overview">Resumen</string>
     <string name="tab_itinerary">Itinerario</string>
 
-    <string name="cd_back">Atrás</string>
+    <string name="cd_back">AtrÃ¡s</string>
     <string name="action_open">Abrir</string>
-    <string name="action_add">Añadir</string>
+    <string name="action_add">AÃ±adir</string>
     <string name="action_edit">Editar</string>
     <string name="action_delete">Eliminar</string>
     <string name="action_save">Guardar</string>
     <string name="action_cancel">Cancelar</string>
     <string name="action_ok">OK</string>
-    <string name="action_add_trip">Añadir viaje</string>
-    <string name="action_add_activity">Añadir actividad</string>
-    <string name="action_open_gallery">Abrir galería</string>
+    <string name="action_add_trip">AÃ±adir viaje</string>
+    <string name="action_add_activity">AÃ±adir actividad</string>
+    <string name="action_open_gallery">Abrir galerÃ­a</string>
     <string name="action_see_all_trips">Ver todos los viajes</string>
-    <string name="action_open_terms">Abrir términos y condiciones</string>
+    <string name="action_open_terms">Abrir tÃ©rminos y condiciones</string>
     <string name="action_accept">Aceptar</string>
     <string name="action_reject">Rechazar</string>
     <string name="action_use_template">Usar plantilla</string>
 
-    <string name="label_title">Título</string>
-    <string name="label_description">Descripción</string>
+    <string name="label_title">TÃ­tulo</string>
+    <string name="label_description">DescripciÃ³n</string>
     <string name="label_city">Ciudad</string>
-    <string name="label_country">País</string>
+    <string name="label_country">PaÃ­s</string>
     <string name="label_start_date">Fecha de inicio</string>
     <string name="label_end_date">Fecha de fin</string>
     <string name="label_date">Fecha</string>
@@ -48,21 +48,21 @@
     <string name="label_status">Estado</string>
     <string name="label_budget">Presupuesto</string>
     <string name="label_cost">Coste</string>
-    <string name="label_category">Categoría</string>
+    <string name="label_category">CategorÃ­a</string>
     <string name="label_activity_template">Plantilla de actividad</string>
     <string name="label_move_itinerary_with_trip">Mover itinerario con el viaje</string>
     <string name="label_move_itinerary_with_trip_hint">Recomendado al editar un viaje que ya tiene actividades.</string>
 
     <string name="placeholder_select_date">Seleccionar fecha</string>
     <string name="placeholder_select_time">Seleccionar hora</string>
-    <string name="placeholder_select_country">Seleccionar país</string>
+    <string name="placeholder_select_country">Seleccionar paÃ­s</string>
 
     <string name="msg_trip_not_found">Viaje no encontrado.</string>
     <string name="error_generic">Se ha producido un error inesperado.</string>
-    <string name="error_title_required">El título es obligatorio.</string>
-    <string name="error_description_required">La descripción es obligatoria.</string>
+    <string name="error_title_required">El tÃ­tulo es obligatorio.</string>
+    <string name="error_description_required">La descripciÃ³n es obligatoria.</string>
     <string name="error_city_required">La ciudad es obligatoria.</string>
-    <string name="error_country_required">El país es obligatorio.</string>
+    <string name="error_country_required">El paÃ­s es obligatorio.</string>
     <string name="error_start_date_required">La fecha de inicio es obligatoria.</string>
     <string name="error_end_date_required">La fecha de fin es obligatoria.</string>
     <string name="error_start_date_future">La fecha de inicio debe ser futura.</string>
@@ -77,16 +77,16 @@
     <string name="error_cost_negative">El coste no puede ser negativo.</string>
     <string name="error_activity_date_future">La fecha de la actividad debe ser futura.</string>
     <string name="error_activity_date_within_trip">La fecha de la actividad debe estar dentro del viaje.</string>
-    <string name="error_trip_has_activity_outside_range">Amplía las fechas del viaje o mueve el itinerario con el viaje.</string>
+    <string name="error_trip_has_activity_outside_range">AmplÃ­a las fechas del viaje o mueve el itinerario con el viaje.</string>
     <string name="error_trip_not_found">Viaje no encontrado.</string>
     <string name="error_activity_not_found">Actividad no encontrada.</string>
     <string name="trip_status_draft">Borrador</string>
-    <string name="trip_status_planning">Planificación</string>
-    <string name="trip_status_upcoming">Próximo</string>
+    <string name="trip_status_planning">PlanificaciÃ³n</string>
+    <string name="trip_status_upcoming">PrÃ³ximo</string>
     <string name="trip_status_completed">Completado</string>
-    <string name="trip_status_draft_description">Borrador para ideas o viajes todavía incompletos.</string>
-    <string name="trip_status_planning_description">Planificación cuando estás preparando fechas y logística.</string>
-    <string name="trip_status_upcoming_description">Próximo cuando el viaje está cerca y casi cerrado.</string>
+    <string name="trip_status_draft_description">Borrador para ideas o viajes todavÃ­a incompletos.</string>
+    <string name="trip_status_planning_description">PlanificaciÃ³n cuando estÃ¡s preparando fechas y logÃ­stica.</string>
+    <string name="trip_status_upcoming_description">PrÃ³ximo cuando el viaje estÃ¡ cerca y casi cerrado.</string>
     <string name="trip_status_completed_description">Completado para viajes terminados y gastos cerrados.</string>
     <string name="trip_filter_all">Todos</string>
     <string name="trip_overview_title">Resumen de viajes</string>
@@ -96,7 +96,7 @@
     <string name="trip_money_summary">Presupuesto %1$s | Gastado %2$s | Restante %3$s</string>
     <string name="trip_activities_title">Actividades</string>
     <string name="trip_remaining_title">Restante</string>
-    <string name="activity_category_value">Categoría: %1$s</string>
+    <string name="activity_category_value">CategorÃ­a: %1$s</string>
     <string name="activity_cost_value">Coste: %1$s</string>
     <string name="activity_category_restaurant">Restaurante</string>
     <string name="activity_category_transport">Transporte</string>
@@ -104,30 +104,30 @@
     <string name="activity_category_leisure">Ocio</string>
     <string name="activity_category_other">Otro</string>
     <string name="preset_restaurant_breakfast_title">Parada para desayunar</string>
-    <string name="preset_restaurant_breakfast_description">Desayuno rápido cerca del hotel antes de la primera visita.</string>
+    <string name="preset_restaurant_breakfast_description">Desayuno rÃ¡pido cerca del hotel antes de la primera visita.</string>
     <string name="preset_restaurant_dinner_title">Reserva para cenar</string>
     <string name="preset_restaurant_dinner_description">Cena reservada para la noche principal del viaje.</string>
     <string name="preset_transport_airport_title">Traslado al aeropuerto</string>
     <string name="preset_transport_airport_description">Trayecto entre el aeropuerto y el alojamiento.</string>
     <string name="preset_transport_daypass_title">Abono diario de transporte</string>
-    <string name="preset_transport_daypass_description">Pase de transporte público para moverte por la ciudad.</string>
+    <string name="preset_transport_daypass_description">Pase de transporte pÃºblico para moverte por la ciudad.</string>
     <string name="preset_museum_ticket_title">Entrada al museo</string>
-    <string name="preset_museum_ticket_description">Entrada estándar al museo con franja horaria reservada.</string>
+    <string name="preset_museum_ticket_description">Entrada estÃ¡ndar al museo con franja horaria reservada.</string>
     <string name="preset_museum_tour_title">Visita guiada al museo</string>
-    <string name="preset_museum_tour_description">Recorrido guiado más largo con explicaciones.</string>
+    <string name="preset_museum_tour_description">Recorrido guiado mÃ¡s largo con explicaciones.</string>
     <string name="preset_leisure_walk_title">Paseo al atardecer</string>
-    <string name="preset_leisure_walk_description">Paseo gratuito por una zona bonita al final del día.</string>
+    <string name="preset_leisure_walk_description">Paseo gratuito por una zona bonita al final del dÃ­a.</string>
     <string name="preset_other_checkin_title">Check-in del alojamiento</string>
-    <string name="preset_other_checkin_description">Llegada, recogida de llaves y preparación de la habitación o apartamento.</string>
-    <string name="country_spain">España</string>
+    <string name="preset_other_checkin_description">Llegada, recogida de llaves y preparaciÃ³n de la habitaciÃ³n o apartamento.</string>
+    <string name="country_spain">EspaÃ±a</string>
     <string name="country_brazil">Brasil</string>
     <string name="country_italy">Italia</string>
     <string name="country_france">Francia</string>
     <string name="country_portugal">Portugal</string>
     <string name="country_germany">Alemania</string>
     <string name="country_united_kingdom">Reino Unido</string>
-    <string name="country_netherlands">Países Bajos</string>
-    <string name="country_belgium">Bélgica</string>
+    <string name="country_netherlands">PaÃ­ses Bajos</string>
+    <string name="country_belgium">BÃ©lgica</string>
 
     <string name="pref_username">Nombre de usuario</string>
     <string name="pref_date_of_birth">Fecha de nacimiento</string>
@@ -143,53 +143,56 @@
     <string name="pref_dark_mode_saved">Preferencia de tema actualizada</string>
     <string name="pref_username_saved">Nombre de usuario guardado</string>
     <string name="pref_date_of_birth_saved">Fecha de nacimiento guardada</string>
+    <string name="pref_date_of_birth_future_error">La fecha de nacimiento no puede estar en el futuro</string>
+    <string name="pref_date_of_birth_min_age_error">Debes tener al menos 16 años</string>
     <string name="pref_username_dialog_title">Definir nombre de usuario</string>
-    <string name="pref_username_required">El nombre de usuario no puede estar vacío.</string>
+    <string name="pref_username_required">El nombre de usuario no puede estar vacÃ­o.</string>
 
     <string name="settings_section_title">Ajustes de la app</string>
-    <string name="settings_section_body">Gestiona preferencias, información y términos legales.</string>
+    <string name="settings_section_body">Gestiona preferencias, informaciÃ³n y tÃ©rminos legales.</string>
     <string name="settings_preferences">Preferencias</string>
     <string name="settings_preferences_subtitle">Idioma, tema y notificaciones</string>
     <string name="settings_about">Acerca de</string>
-    <string name="settings_about_subtitle">Equipo, versión y stack técnico</string>
-    <string name="settings_terms">Términos y condiciones</string>
+    <string name="settings_about_subtitle">Equipo, versiÃ³n y stack tÃ©cnico</string>
+    <string name="settings_terms">TÃ©rminos y condiciones</string>
     <string name="settings_terms_subtitle">Lee y revisa el texto legal</string>
 
-    <string name="home_hero_title">Planificación de viajes, simplificada</string>
+    <string name="home_hero_title">PlanificaciÃ³n de viajes, simplificada</string>
     <string name="home_hero_subtitle">%1$d viajes cargados en modo mock</string>
-    <string name="home_next_trip">Próximo viaje</string>
+    <string name="home_next_trip">PrÃ³ximo viaje</string>
     <string name="home_stat_trips">Viajes</string>
     <string name="home_stat_budget">Presupuesto</string>
     <string name="home_stat_spent">Gastado</string>
 
-    <string name="gallery_mock_items">%1$d elementos mock listos para la galería.</string>
-    <string name="gallery_section_title">Galería</string>
+    <string name="gallery_mock_items">%1$d elementos mock listos para la galerÃ­a.</string>
+    <string name="gallery_section_title">GalerÃ­a</string>
 
     <string name="about_banner_subtitle">Un mock de planificador de viajes con identidad de marca para Sprint 01.</string>
     <string name="about_team_title">Equipo</string>
     <string name="about_team_body">Anouar El Kabiri y Eloi Mora Palomino proyecto BBTraveling</string>
-    <string name="about_stack_title">Stack técnico</string>
+    <string name="about_stack_title">Stack tÃ©cnico</string>
     <string name="about_stack_body">Kotlin, Jetpack Compose, Material 3 y Navigation Compose</string>
-    <string name="about_version_title">Versión</string>
-    <string name="about_version_body">Versión 2.0.1 | namespace com.example.bbtraveling</string>
+    <string name="about_version_title">VersiÃ³n</string>
+    <string name="about_version_body">VersiÃ³n 2.0.1 | namespace com.example.bbtraveling</string>
     <string name="about_license_title">Licencia</string>
-    <string name="about_license_body">Proyecto académico mock para entrega en clase</string>
+    <string name="about_license_body">Proyecto acadÃ©mico mock para entrega en clase</string>
 
     <string name="terms_notice_title">Aviso legal mock</string>
-    <string name="terms_intro">Esta pantalla forma parte de la entrega del Sprint 01 y representa un flujo legal no funcional. Existe para demostrar navegación completa y una interfaz cuidada.</string>
+    <string name="terms_intro">Esta pantalla forma parte de la entrega del Sprint 01 y representa un flujo legal no funcional. Existe para demostrar navegaciÃ³n completa y una interfaz cuidada.</string>
     <string name="terms_scope_title">1. Alcance</string>
-    <string name="terms_scope_body">Toda la información mostrada en la app es mock. No se ejecutan reservas, compras ni solicitudes externas.</string>
+    <string name="terms_scope_body">Toda la informaciÃ³n mostrada en la app es mock. No se ejecutan reservas, compras ni solicitudes externas.</string>
     <string name="terms_content_title">2. Contenido</string>
-    <string name="terms_content_body">Viajes, precios, fechas, transporte, alojamiento e imágenes son ficticios pero plausibles para fines de presentación.</string>
+    <string name="terms_content_body">Viajes, precios, fechas, transporte, alojamiento e imÃ¡genes son ficticios pero plausibles para fines de presentaciÃ³n.</string>
     <string name="terms_privacy_title">3. Privacidad</string>
-    <string name="terms_privacy_body">Este prototipo no almacena datos personales ni se conecta a servicios de autenticación.</string>
-    <string name="terms_acceptance_title">4. Aceptación</string>
-    <string name="terms_acceptance_body">Usar el prototipo implica entender que es un mock académico preparado para evaluación en marzo de 2026.</string>
+    <string name="terms_privacy_body">Este prototipo no almacena datos personales ni se conecta a servicios de autenticaciÃ³n.</string>
+    <string name="terms_acceptance_title">4. AceptaciÃ³n</string>
+    <string name="terms_acceptance_body">Usar el prototipo implica entender que es un mock acadÃ©mico preparado para evaluaciÃ³n en marzo de 2026.</string>
 
     <string name="splash_tagline">Built on Brotherhood. Driven by Adventure.</string>
-    <string name="splash_version_label">Versión 2.0.1 | Sprint 02</string>
+    <string name="splash_version_label">VersiÃ³n 2.0.1 | Sprint 02</string>
 
-    <string name="lang_english">Inglés</string>
-    <string name="lang_spanish">Español</string>
-    <string name="lang_catalan">Catalán</string>
+    <string name="lang_english">InglÃ©s</string>
+    <string name="lang_spanish">EspaÃ±ol</string>
+    <string name="lang_catalan">CatalÃ¡n</string>
 </resources>
+

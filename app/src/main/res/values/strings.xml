@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
     <string name="app_name">BBTraveling</string>
     <string name="nav_home">Home</string>
     <string name="nav_trips">Trips</string>
@@ -143,6 +143,8 @@
     <string name="pref_dark_mode_saved">Theme preference updated</string>
     <string name="pref_username_saved">Username saved</string>
     <string name="pref_date_of_birth_saved">Date of birth saved</string>
+    <string name="pref_date_of_birth_future_error">Date of birth cannot be in the future</string>
+    <string name="pref_date_of_birth_min_age_error">You must be at least 16 years old</string>
     <string name="pref_username_dialog_title">Set username</string>
     <string name="pref_username_required">Username cannot be empty.</string>
     <string name="settings_section_title">App settings</string>
@@ -187,3 +189,4 @@
     <string name="lang_spanish">Spanish</string>
     <string name="lang_catalan">Catalan</string>
 </resources>
+
