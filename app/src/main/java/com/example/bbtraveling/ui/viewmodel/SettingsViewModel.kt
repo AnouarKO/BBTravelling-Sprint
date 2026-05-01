@@ -2,13 +2,15 @@ package com.example.bbtraveling.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.bbtraveling.domain.UserSettings
 import com.example.bbtraveling.domain.repository.UserSettingsRepository
+import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 
 // Saca preferencias guardadas a la UI y registra cambios importantes
-class SettingsViewModel(
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
     private val repository: UserSettingsRepository
 ) : ViewModel() {
 
@@ -43,17 +45,5 @@ class SettingsViewModel(
 
     companion object {
         private const val TAG = "SettingsViewModel"
-    }
-}
-
-class SettingsViewModelFactory(
-    private val repository: UserSettingsRepository
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
-            return SettingsViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
 }

@@ -3,12 +3,16 @@ package com.example.bbtraveling.data.settings
 import android.content.Context
 import com.example.bbtraveling.domain.UserSettings
 import com.example.bbtraveling.domain.repository.UserSettingsRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 // Guarda ajustes simples y los carga al volver a entrar
-class SharedPreferencesSettingsRepository(context: Context) : UserSettingsRepository {
+class SharedPreferencesSettingsRepository @Inject constructor(
+    @ApplicationContext context: Context
+) : UserSettingsRepository {
 
     private val preferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     private val _settings = MutableStateFlow(loadSettings())

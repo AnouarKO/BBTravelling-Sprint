@@ -2,7 +2,7 @@ package com.example.bbtraveling.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import com.example.bbtraveling.domain.ActivityDraft
 import com.example.bbtraveling.domain.OperationResult
 import com.example.bbtraveling.domain.Trip
@@ -10,10 +10,12 @@ import com.example.bbtraveling.domain.TripDraft
 import com.example.bbtraveling.domain.repository.TripRepository
 import com.example.bbtraveling.domain.validation.TravelValidator
 import java.time.LocalDate
+import javax.inject.Inject
 import kotlinx.coroutines.flow.StateFlow
 
 // Coordina acciones de viajes antes de llegar al repo
-class TripsViewModel(
+@HiltViewModel
+class TripsViewModel @Inject constructor(
     private val repository: TripRepository
 ) : ViewModel() {
 
@@ -124,17 +126,5 @@ class TripsViewModel(
 
     private companion object {
         const val TAG = "TripsViewModel"
-    }
-}
-
-class TripsViewModelFactory(
-    private val repository: TripRepository
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TripsViewModel::class.java)) {
-            return TripsViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
 }
