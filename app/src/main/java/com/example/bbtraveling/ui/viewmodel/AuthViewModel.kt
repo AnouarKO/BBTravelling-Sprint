@@ -112,6 +112,13 @@ class AuthViewModel @Inject constructor(
             )
             return
         }
+        if (birthdate.isAfter(LocalDate.now().minusYears(MINIMUM_REGISTER_AGE_YEARS))) {
+            _uiState.value = _uiState.value.copy(
+                error = AuthMessages.MINIMUM_AGE_REQUIRED.localizedAuthMessage(),
+                message = null
+            )
+            return
+        }
         if (password != confirmPassword) {
             _uiState.value = _uiState.value.copy(
                 error = AuthMessages.PASSWORDS_DO_NOT_MATCH.localizedAuthMessage(),
@@ -227,6 +234,7 @@ class AuthViewModel @Inject constructor(
             AuthMessages.EMAIL_REQUIRED -> R.string.auth_error_email_required
             AuthMessages.INVALID_EMAIL -> R.string.auth_error_invalid_email
             AuthMessages.PASSWORDS_DO_NOT_MATCH -> R.string.auth_error_passwords_do_not_match
+            AuthMessages.MINIMUM_AGE_REQUIRED -> R.string.auth_error_minimum_age_required
             AuthMessages.EMAIL_NOT_VERIFIED -> R.string.auth_error_email_not_verified
             AuthMessages.USERNAME_IN_USE -> R.string.auth_error_username_in_use
             AuthMessages.LOCAL_PROFILE_NOT_FOUND -> R.string.auth_error_local_profile_not_found
@@ -245,5 +253,6 @@ class AuthViewModel @Inject constructor(
 
     private companion object {
         const val TAG = "AuthViewModel"
+        const val MINIMUM_REGISTER_AGE_YEARS = 18L
     }
 }

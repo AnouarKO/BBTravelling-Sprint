@@ -74,6 +74,7 @@ Flujo implementado:
 - Presupuesto y coste no negativos.
 - Titulo de viaje no duplicado para el usuario.
 - Username unico antes del registro.
+- Registro permitido solo para usuarios de 18 anos o mas.
 - Email valido y mensajes de error localizados.
 
 ## Idiomas
@@ -92,16 +93,18 @@ Idiomas disponibles:
 
 ## Tests
 
-La suite de unit tests cubre:
+La suite de unit tests que se ejecuta con `:app:testDebugUnitTest` incluye `46 tests`, con `0 failures` y `0 errors` en la verificacion local.
 
-- Dominio y validaciones de viajes.
-- Repositorio in-memory usado como soporte de tests y previews.
-- Room Database, DAOs y relaciones.
-- `RoomTripRepository`.
-- `RoomUserProfileRepository`.
-- `AuthViewModel`.
-- `SettingsViewModel`.
-- `TripsViewModel`.
+- `ExampleUnitTest`: test base de entorno.
+- `TripTest`: calculos de dominio del viaje.
+- `TripRepositoryImplTest`: CRUD in-memory, validaciones y titulo duplicado.
+- `TravelDatabaseTest`: Room Database, DAOs, relaciones y persistencia basica.
+- `RoomTripRepositoryTest`: CRUD persistente, filtrado por usuario y validaciones de trips.
+- `RoomUserProfileRepositoryTest`: persistencia y observacion del perfil local.
+- `AuthViewModelTest`: login, registro, recuperacion, email verification, confirmacion de password y edad minima.
+- `SettingsViewModelTest`: perfil local autenticado, idioma, tema y preferencias sin usuario.
+- `TripsViewModelTest`: carga, creacion y validaciones desde ViewModel.
+- `MainDispatcherRule`: regla de soporte para tests con corrutinas.
 
 Comandos de verificacion:
 

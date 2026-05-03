@@ -302,6 +302,7 @@ trips.id    1 --- N itinerary_items.tripId
 ### Estrategia de uso
 
 - Al registrar un usuario, Firebase crea la cuenta y Room guarda el perfil local.
+- El registro valida todos los campos obligatorios, confirmacion de contrasena y edad minima de 18 anos.
 - Al hacer login, solo se acepta el usuario si el email esta verificado y existe perfil local.
 - Los viajes nuevos guardan `ownerLogin` con el email del usuario autenticado.
 - La pantalla de viajes observa solo `trips.ownerLogin = currentUser.login`.
@@ -315,8 +316,13 @@ Durante Sprint 03 se ha usado `fallbackToDestructiveMigration(false)` porque es 
 
 La cobertura del Sprint 03 incluye unit tests JVM con Robolectric para:
 
-- DAOs y base de datos Room en memoria.
-- Filtrado de viajes por usuario autenticado.
-- CRUD persistente de viajes e itinerario.
-- Mapeo de perfil local.
-- ViewModels de auth, settings y trips.
+- `ExampleUnitTest`: entorno basico.
+- `TripTest`: calculos de dominio.
+- `TripRepositoryImplTest`: CRUD in-memory, validaciones y titulo duplicado.
+- `TravelDatabaseTest`: Room Database, DAOs y relaciones.
+- `RoomTripRepositoryTest`: CRUD persistente y filtrado por usuario autenticado.
+- `RoomUserProfileRepositoryTest`: mapeo y observacion de perfil local.
+- `AuthViewModelTest`: login, registro, recover password, confirmacion de password y edad minima.
+- `SettingsViewModelTest`: perfil autenticado, idioma, tema y preferencias sin cuenta.
+- `TripsViewModelTest`: carga, creacion y validaciones desde ViewModel.
+- `MainDispatcherRule`: soporte para corrutinas en tests.

@@ -164,7 +164,7 @@
     <string name="pref_username_saved">Nom d\'usuari desat</string>
     <string name="pref_date_of_birth_saved">Data de naixement desada</string>
     <string name="pref_date_of_birth_future_error">La data de naixement no pot estar en el futur</string>
-    <string name="pref_date_of_birth_min_age_error">Has de tenir almenys 16 anys</string>
+    <string name="pref_date_of_birth_min_age_error">Has de tenir almenys 18 anys</string>
     <string name="pref_username_dialog_title">Definir nom d\'usuari</string>
     <string name="pref_username_required">El nom d\'usuari no pot estar buit.</string>
     <string name="settings_section_title">Ajustos de l\'app</string>
@@ -190,6 +190,7 @@
     <string name="auth_error_email_required">El correu electrònic és obligatori.</string>
     <string name="auth_error_invalid_email">L\'adreça de correu electrònic no és vàlida.</string>
     <string name="auth_error_passwords_do_not_match">Les dues contrasenyes no coincideixen.</string>
+    <string name="auth_error_minimum_age_required">Has de tenir almenys 18 anys.</string>
     <string name="auth_error_email_not_verified">El correu electrònic no està verificat. Revisa el correu abans de continuar.</string>
     <string name="auth_error_username_in_use">Aquest nom d\'usuari ja està en ús.</string>
     <string name="auth_error_local_profile_not_found">No s\'ha trobat cap perfil local per a aquest compte. Registra\'t des d\'aquesta app abans d\'iniciar sessió.</string>

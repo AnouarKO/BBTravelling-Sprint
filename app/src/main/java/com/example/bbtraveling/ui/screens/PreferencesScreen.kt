@@ -433,7 +433,7 @@ private fun Long.toLocalDate(): LocalDate {
 }
 
 private val PREFERENCE_DATE_FORMAT: DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
-private const val MINIMUM_AGE = 16
+private const val MINIMUM_AGE = 18
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable

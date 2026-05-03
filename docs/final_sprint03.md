@@ -42,7 +42,7 @@ Completar la capa persistente y de autenticacion de `BBTraveling` con:
 | T5.2 | Validar datos persistidos y casos limite | Anouar | Completada |
 | T5.3 | Anadir logs de operaciones y errores de Room | Eloi | Completada |
 | T5.4 | Actualizar README y documentacion final del sprint | Eloi | Completada |
-| T5.5 | Evidencia de video | Anouar | Pendiente de grabacion |
+| T5.5 | Evidencia de video | Anouar | Pendiente de enlace final |
 
 Resumen funcional del backlog:
 - `Room` sustituye el almacenamiento in-memory para viajes, actividades, perfiles y logs de acceso.
@@ -51,6 +51,8 @@ Resumen funcional del backlog:
 - El registro crea la cuenta Firebase y el perfil local asociado al correo autenticado.
 - Todos los campos del registro son obligatorios salvo `accept receive emails`.
 - El registro exige confirmacion de contrasena y valida que ambas contrasenas coincidan.
+- El registro exige edad minima de 18 anos.
+- La pantalla de acceso permite cambiar idioma y fondo sin cuenta.
 - Cada usuario autenticado solo ve sus propios viajes y actividades.
 - Se han anadido tests unitarios de `DAO`, repositorios, ViewModels y validaciones principales del sprint.
 
@@ -64,7 +66,9 @@ Resumen funcional del backlog:
 - [x] Verificacion de email exigida antes del login funcional
 - [x] Informacion local de usuario persistida con `username`, `birthdate`, `address`, `country`, `phone` y `accept receive emails`
 - [x] Registro validado con `email`, `password`, `confirm password`, `username`, `birthdate`, `address`, `country` y `phone` obligatorios
+- [x] Registro bloqueado para usuarios menores de 18 anos
 - [x] `accept receive emails` mantenido como opcion no obligatoria
+- [x] Cambio de idioma y tema disponible antes de iniciar sesion
 - [x] Trips asociados al usuario logado y filtrados correctamente
 - [x] Registro de accesos `login/logout` persistido en base de datos
 - [x] `design.md`, `README.md` y documento final del sprint actualizados
@@ -73,8 +77,20 @@ Resumen funcional del backlog:
 
 Validacion tecnica:
 - [x] `./gradlew.bat :app:assembleDebug --console=plain`
-- [x] `./gradlew.bat :app:testDebugUnitTest --console=plain`
+- [x] `./gradlew.bat :app:testDebugUnitTest --console=plain` (`46 tests`, `0 failures`, `0 errors`)
 - [x] `./gradlew.bat :app:lintDebug --console=plain`
+
+Tests ejecutados con `:app:testDebugUnitTest`:
+- `ExampleUnitTest`
+- `TripTest`
+- `TripRepositoryImplTest`
+- `TravelDatabaseTest`
+- `RoomTripRepositoryTest`
+- `RoomUserProfileRepositoryTest`
+- `AuthViewModelTest`
+- `SettingsViewModelTest`
+- `TripsViewModelTest`
+- `MainDispatcherRule` como regla de soporte de corrutinas
 
 ---
 
@@ -90,7 +106,7 @@ Validacion tecnica:
   Mitigacion: login bloqueado si no existe perfil local y perfil enlazado por correo normalizado.
 
 - Validaciones incompletas en el registro  
-  Mitigacion: validacion centralizada en `AuthViewModel` con comprobacion de campos obligatorios y confirmacion de contrasena.
+  Mitigacion: validacion centralizada en `AuthViewModel` con comprobacion de campos obligatorios, edad minima y confirmacion de contrasena.
 
 - Fugas de datos entre usuarios  
   Mitigacion: filtrado de viajes por usuario autenticado y persistencia separada por `userLogin`.

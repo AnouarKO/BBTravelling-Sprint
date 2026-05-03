@@ -164,7 +164,7 @@
     <string name="pref_username_saved">Nombre de usuario guardado</string>
     <string name="pref_date_of_birth_saved">Fecha de nacimiento guardada</string>
     <string name="pref_date_of_birth_future_error">La fecha de nacimiento no puede estar en el futuro</string>
-    <string name="pref_date_of_birth_min_age_error">Debes tener al menos 16 años</string>
+    <string name="pref_date_of_birth_min_age_error">Debes tener al menos 18 años</string>
     <string name="pref_username_dialog_title">Definir nombre de usuario</string>
     <string name="pref_username_required">El nombre de usuario no puede estar vacío.</string>
     <string name="settings_section_title">Ajustes de la app</string>
@@ -190,6 +190,7 @@
     <string name="auth_error_email_required">El correo electrónico es obligatorio.</string>
     <string name="auth_error_invalid_email">La dirección de correo electrónico no es válida.</string>
     <string name="auth_error_passwords_do_not_match">Las dos contraseñas no coinciden.</string>
+    <string name="auth_error_minimum_age_required">Debes tener al menos 18 años.</string>
     <string name="auth_error_email_not_verified">El correo electrónico no está verificado. Revisa tu correo antes de continuar.</string>
     <string name="auth_error_username_in_use">Este nombre de usuario ya está en uso.</string>
     <string name="auth_error_local_profile_not_found">No se ha encontrado ningún perfil local para esta cuenta. Regístrate desde esta app antes de iniciar sesión.</string>

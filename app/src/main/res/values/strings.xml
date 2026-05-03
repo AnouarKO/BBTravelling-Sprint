@@ -164,7 +164,7 @@
     <string name="pref_username_saved">Username saved</string>
     <string name="pref_date_of_birth_saved">Date of birth saved</string>
     <string name="pref_date_of_birth_future_error">Date of birth cannot be in the future</string>
-    <string name="pref_date_of_birth_min_age_error">You must be at least 16 years old</string>
+    <string name="pref_date_of_birth_min_age_error">You must be at least 18 years old</string>
     <string name="pref_username_dialog_title">Set username</string>
     <string name="pref_username_required">Username cannot be empty.</string>
     <string name="settings_section_title">App settings</string>
@@ -190,6 +190,7 @@
     <string name="auth_error_email_required">Email is required.</string>
     <string name="auth_error_invalid_email">Email address is not valid.</string>
     <string name="auth_error_passwords_do_not_match">Passwords do not match.</string>
+    <string name="auth_error_minimum_age_required">You must be at least 18 years old.</string>
     <string name="auth_error_email_not_verified">Email address not verified. Please check your email before continuing.</string>
     <string name="auth_error_username_in_use">Username is already in use.</string>
     <string name="auth_error_local_profile_not_found">No local profile was found for this account. Register from this app before logging in.</string>

@@ -8,6 +8,7 @@ object AuthMessages {
     const val EMAIL_REQUIRED = "auth_error_email_required"
     const val INVALID_EMAIL = "auth_error_invalid_email"
     const val PASSWORDS_DO_NOT_MATCH = "auth_error_passwords_do_not_match"
+    const val MINIMUM_AGE_REQUIRED = "auth_error_minimum_age_required"
     const val EMAIL_NOT_VERIFIED = "auth_error_email_not_verified"
     const val USERNAME_IN_USE = "auth_error_username_in_use"
     const val LOCAL_PROFILE_NOT_FOUND = "auth_error_local_profile_not_found"

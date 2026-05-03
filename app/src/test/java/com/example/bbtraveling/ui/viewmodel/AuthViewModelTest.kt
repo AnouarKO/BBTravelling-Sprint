@@ -140,6 +140,28 @@ class AuthViewModelTest {
     }
 
     @Test
+    fun register_withMinorBirthdate_returnsLocalizedErrorAndSkipsRepository() {
+        viewModel.register(
+            email = "new@example.com",
+            password = "Test1234!",
+            confirmPassword = "Test1234!",
+            username = "test01",
+            birthdate = LocalDate.now().minusYears(18).plusDays(1),
+            address = "Test street 1",
+            country = "Spain",
+            phone = "600000000",
+            acceptsReceiveEmails = false
+        )
+
+        assertEquals(
+            context.getString(R.string.auth_error_minimum_age_required),
+            viewModel.uiState.value.error
+        )
+        assertNull(repository.lastRegistration)
+        assertFalse(viewModel.uiState.value.registrationCompleted)
+    }
+
+    @Test
     fun recoverPassword_successReturnsLocalizedMessage() {
         repository.recoverPasswordResult = AuthResult.Success(AuthMessages.PASSWORD_RECOVERY_SENT)
 
