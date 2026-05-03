@@ -1,129 +1,124 @@
-# BBTraveling (BloodBrothersTravelling)
+# BBTraveling
 
 Proyecto Android de planificacion de viajes para la asignatura **Applications for Mobile Devices**.
 
-`BBTraveling` se desarrollo en dos sprints:
-- `Sprint 01`: estructura visual, navegacion y pantallas base.
-- `Sprint 02`: logica funcional, validaciones, persistencia de ajustes, testing y documentacion.
+Version actual: `3.0.0`  
+Sprint actual: `Sprint 03`
 
 ## Estado del proyecto
 
-La version actual implementa los requisitos funcionales del `LAB_SPRINT02`:
-- arquitectura `UI -> ViewModel -> Repository -> DataSource`
-- CRUD inMemory de viajes
-- CRUD inMemory de actividades del itinerario
-- validaciones en UI, ViewModel y Repository
-- ajustes persistidos con `SharedPreferences`
-- multi-language funcional (`en`, `es`, `ca`)
-- Terms & Conditions en primer arranque
-- presupuesto de viaje y costes de actividades en euros
-- logs visibles en Logcat
-- tests unitarios de dominio y repositorio
+La version actual implementa los requisitos principales del `LAB_SPRINT03`:
+
+- Persistencia de viajes e itinerario con SQLite usando Room.
+- Sustitucion del almacenamiento in-memory en produccion por `RoomTripRepository`.
+- Arquitectura Repository mantenida.
+- Hilt configurado como libreria de inyeccion de dependencias.
+- Firebase Authentication con email/password.
+- Registro, login, logout y recuperacion de contrasena.
+- Verificacion de email antes de permitir el acceso.
+- Perfil local de usuario persistido en Room.
+- Viajes asociados al usuario autenticado y filtrados por cuenta.
+- Registro local de accesos login/logout.
+- Validaciones, logs y tests unitarios por capas.
 
 ## Arquitectura
 
-La app sigue una estructura MVVM sencilla:
+La app sigue una estructura MVVM:
 
 ```text
-UI (Screens)
+UI (Compose Screens)
   -> ViewModel
   -> Repository
-  -> DataSource
+  -> Room / Firebase / SharedPreferences
 ```
 
 Piezas principales:
-- `TripsViewModel`: coordina CRUD, validaciones previas y logs de viajes/itinerario.
-- `SettingsViewModel`: gestiona preferencias persistidas y logs de ajustes.
-- `TripRepositoryImpl`: concentra la logica de negocio de viajes y actividades.
-- `FakeTripDataSource`: mantiene el estado en memoria.
-- `SharedPreferencesSettingsRepository`: persiste idioma, tema, usuario y terminos aceptados.
 
-## Funcionalidad implementada
+- `AuthViewModel`: coordina login, registro, recuperacion y logout.
+- `TripsViewModel`: coordina CRUD de viajes e itinerario.
+- `SettingsViewModel`: combina ajustes globales con el perfil local del usuario autenticado.
+- `FirebaseAuthRepository`: encapsula Firebase Auth y logs de acceso.
+- `RoomTripRepository`: CRUD persistente de viajes e itinerario con Room.
+- `RoomUserProfileRepository`: acceso al perfil local del usuario.
+- `SharedPreferencesSettingsRepository`: idioma, tema y aceptacion de terminos.
 
-### Viajes
-- crear, editar y eliminar viajes
-- titulo, descripcion, ciudad, pais, fechas, estado y presupuesto
-- estado sugerido automaticamente segun fechas
-- reprogramacion del viaje con opcion de mover tambien el itinerario
+## Persistencia local
 
-### Itinerario
-- crear, editar y eliminar actividades
-- fecha y hora mediante pickers
-- categorias y plantillas predefinidas
-- coste por actividad en euros
+Room usa la base de datos `bbtraveling.db` con estas tablas:
 
-### Validaciones
-- campos obligatorios
-- fechas futuras
-- fecha de inicio anterior a fecha final
-- actividades dentro del rango del viaje
-- presupuesto y coste no negativos
-- mensajes de error claros en pantalla
+- `users`: perfil local del usuario (`login`, `username`, `birthdate`, `address`, `country`, `phone`, `acceptsReceiveEmails`).
+- `trips`: viajes asociados a `ownerLogin`.
+- `itinerary_items`: actividades asociadas a un viaje.
+- `access_logs`: eventos `LOGIN` y `LOGOUT` con `userId` y fecha/hora.
 
-### Ajustes
-- `username`
-- `dateOfBirth`
-- `darkMode`
-- `languageTag`
-- `termsAccepted`
+## Firebase
 
-## Logs
+El proyecto usa Firebase Authentication con proveedor Email/Password.
 
-Los logs solicitados por el sprint se pueden ver en Logcat con estos tags:
-- `TripsViewModel`
-- `SettingsViewModel`
+El archivo `app/google-services.json` es necesario en local, pero no se sube al repositorio porque esta incluido en `.gitignore`.
 
-Criterio aplicado:
-- `Log.i` para operaciones correctas
-- `Log.w` para validaciones rechazadas o reglas de negocio esperadas
-- `Log.e` solo para fallos sin detalle o situaciones realmente anormales
+Flujo implementado:
+
+1. El usuario se registra con email, password y perfil local.
+2. Firebase envia email de verificacion.
+3. La app vuelve a la pantalla de login y muestra el aviso de verificacion.
+4. El login solo permite entrar si el email esta verificado.
+5. Logout cierra la sesion y registra el acceso.
+
+## Validaciones
+
+- Campos obligatorios en viajes y actividades.
+- Fechas futuras.
+- Fecha de inicio anterior a fecha final.
+- Actividades dentro del rango del viaje.
+- Presupuesto y coste no negativos.
+- Titulo de viaje no duplicado para el usuario.
+- Username unico antes del registro.
+- Email valido y mensajes de error localizados.
 
 ## Idiomas
 
-Los textos se gestionan con recursos Android separados:
+Los textos se gestionan con recursos Android:
+
 - `app/src/main/res/values/strings.xml`
 - `app/src/main/res/values-es/strings.xml`
 - `app/src/main/res/values-ca/strings.xml`
 
-El cambio de idioma se aplica en tiempo de ejecucion.
+Idiomas disponibles:
 
-## Verificacion local
+- Ingles
+- Castellano
+- Catalan
 
-Comandos usados para verificar la entrega:
+## Tests
+
+La suite de unit tests cubre:
+
+- Dominio y validaciones de viajes.
+- Repositorio in-memory usado como soporte de tests y previews.
+- Room Database, DAOs y relaciones.
+- `RoomTripRepository`.
+- `RoomUserProfileRepository`.
+- `AuthViewModel`.
+- `SettingsViewModel`.
+- `TripsViewModel`.
+
+Comandos de verificacion:
 
 ```powershell
 ./gradlew.bat :app:assembleDebug --console=plain
 ./gradlew.bat :app:testDebugUnitTest --console=plain
+./gradlew.bat :app:lintDebug --console=plain
 ```
 
-## Evidencia y entrega
+## Entrega
 
-Ruta prevista para el video del sprint:
+La entrega de Sprint 03 debe publicarse como release/tag `v3.x.x`.
 
-```text
-doc/evidence/v2.0.2/
-```
-
-Version de entrega final:
-- `v2.0.2`
-
-## Estructura del repositorio
+Ruta prevista para evidencia:
 
 ```text
-BBTraveling/
-|- app/
-|  \- src/main/
-|     |- java/com/example/bbtraveling/
-|     |  |- data/
-|     |  |- domain/
-|     |  |- navigation/
-|     |  \- ui/
-|     \- res/
-|- doc/
-|- docs/
-|- README.md
-|- CONTRIBUTING.md
-\- LICENSE
+doc/evidence/v3.0.0/
 ```
 
 ## Equipo

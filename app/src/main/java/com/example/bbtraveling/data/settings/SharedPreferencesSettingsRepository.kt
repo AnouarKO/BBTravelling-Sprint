@@ -1,6 +1,7 @@
 package com.example.bbtraveling.data.settings
 
 import android.content.Context
+import androidx.core.content.edit
 import com.example.bbtraveling.domain.UserSettings
 import com.example.bbtraveling.domain.repository.UserSettingsRepository
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -28,27 +29,27 @@ class SharedPreferencesSettingsRepository @Inject constructor(
     }
 
     override fun updateUsername(value: String) {
-        preferences.edit().putString(KEY_USERNAME, value).apply()
+        preferences.edit { putString(KEY_USERNAME, value) }
         _settings.value = _settings.value.copy(username = value)
     }
 
     override fun updateDateOfBirth(value: String) {
-        preferences.edit().putString(KEY_DATE_OF_BIRTH, value).apply()
+        preferences.edit { putString(KEY_DATE_OF_BIRTH, value) }
         _settings.value = _settings.value.copy(dateOfBirth = value)
     }
 
     override fun updateDarkMode(enabled: Boolean) {
-        preferences.edit().putBoolean(KEY_DARK_MODE, enabled).apply()
+        preferences.edit { putBoolean(KEY_DARK_MODE, enabled) }
         _settings.value = _settings.value.copy(darkMode = enabled)
     }
 
     override fun updateLanguage(languageTag: String) {
-        preferences.edit().putString(KEY_LANGUAGE, languageTag).apply()
+        preferences.edit { putString(KEY_LANGUAGE, languageTag) }
         _settings.value = _settings.value.copy(languageTag = languageTag)
     }
 
     override fun setTermsAccepted(accepted: Boolean) {
-        preferences.edit().putBoolean(KEY_TERMS_ACCEPTED, accepted).apply()
+        preferences.edit { putBoolean(KEY_TERMS_ACCEPTED, accepted) }
         _settings.value = _settings.value.copy(termsAccepted = accepted)
     }
 

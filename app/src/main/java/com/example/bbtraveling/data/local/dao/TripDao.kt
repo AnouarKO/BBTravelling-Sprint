@@ -15,6 +15,10 @@ interface TripDao {
     @Query("SELECT * FROM trips ORDER BY startDate ASC")
     fun observeTripsWithActivities(): Flow<List<TripWithActivities>>
 
+    @Transaction
+    @Query("SELECT * FROM trips WHERE ownerLogin = :ownerLogin ORDER BY startDate ASC")
+    fun observeTripsWithActivitiesForOwner(ownerLogin: String): Flow<List<TripWithActivities>>
+
     @Query("SELECT COUNT(*) FROM trips")
     suspend fun countTrips(): Int
 

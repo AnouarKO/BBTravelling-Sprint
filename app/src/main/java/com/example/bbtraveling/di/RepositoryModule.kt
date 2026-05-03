@@ -1,8 +1,10 @@
 package com.example.bbtraveling.di
 
+import com.example.bbtraveling.data.repository.FirebaseAuthRepository
 import com.example.bbtraveling.data.repository.RoomTripRepository
 import com.example.bbtraveling.data.repository.RoomUserProfileRepository
 import com.example.bbtraveling.data.settings.SharedPreferencesSettingsRepository
+import com.example.bbtraveling.domain.repository.AuthRepository
 import com.example.bbtraveling.domain.repository.TripRepository
 import com.example.bbtraveling.domain.repository.UserProfileRepository
 import com.example.bbtraveling.domain.repository.UserSettingsRepository
@@ -15,6 +17,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        repository: FirebaseAuthRepository
+    ): AuthRepository
 
     @Binds
     @Singleton

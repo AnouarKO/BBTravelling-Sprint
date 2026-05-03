@@ -3,9 +3,11 @@ package com.example.bbtraveling.di
 import android.content.Context
 import androidx.room.Room
 import com.example.bbtraveling.data.local.TravelDatabase
+import com.example.bbtraveling.data.local.dao.AccessLogDao
 import com.example.bbtraveling.data.local.dao.ItineraryItemDao
 import com.example.bbtraveling.data.local.dao.TripDao
 import com.example.bbtraveling.data.local.dao.UserProfileDao
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +23,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideClock(): Clock = Clock.systemDefaultZone()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
     @Singleton
@@ -42,4 +48,7 @@ object AppModule {
 
     @Provides
     fun provideUserProfileDao(database: TravelDatabase): UserProfileDao = database.userProfileDao()
+
+    @Provides
+    fun provideAccessLogDao(database: TravelDatabase): AccessLogDao = database.accessLogDao()
 }

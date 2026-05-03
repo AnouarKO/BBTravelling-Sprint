@@ -248,3 +248,75 @@ Ademas:
 - Se aplico soporte multiidioma real (`en`, `es`, `ca`) con recursos por locale
 - Se añadieron logs de operaciones y errores de validacion para Logcat
 - Se incorporaron pruebas unitarias de CRUD y validaciones base
+
+---
+
+## 8. Actualizacion Sprint 03 (Room, Hilt y Firebase)
+
+La arquitectura de produccion queda como:
+
+```text
+Compose UI
+  -> ViewModel
+  -> Repository
+  -> Room / Firebase / SharedPreferences
+```
+
+### Inyeccion de dependencias
+
+Se usa Hilt como libreria DI:
+
+- `BBTravelingApplication` con `@HiltAndroidApp`.
+- `AppModule` provee `TravelDatabase`, DAOs, `FirebaseAuth` y `Clock`.
+- `RepositoryModule` enlaza interfaces de dominio con implementaciones Room/Firebase.
+
+### Esquema Room
+
+Base de datos: `bbtraveling.db`
+
+Tablas:
+
+- `users`
+  - `login` como primary key.
+  - `username` unico.
+  - `birthdate`, `address`, `country`, `phone`, `acceptsReceiveEmails`.
+- `trips`
+  - `id` como primary key.
+  - `ownerLogin` referencia a `users.login`.
+  - campos de viaje: titulo, descripcion, ciudad, pais, fechas, estado, presupuesto, etc.
+- `itinerary_items`
+  - `id` como primary key.
+  - `tripId` referencia a `trips.id`.
+  - campos de actividad: titulo, descripcion, fecha, hora, categoria y coste.
+- `access_logs`
+  - `id` autogenerado.
+  - `userId`, `eventType`, `occurredAt`.
+
+Relaciones:
+
+```text
+users.login 1 --- N trips.ownerLogin
+trips.id    1 --- N itinerary_items.tripId
+```
+
+### Estrategia de uso
+
+- Al registrar un usuario, Firebase crea la cuenta y Room guarda el perfil local.
+- Al hacer login, solo se acepta el usuario si el email esta verificado y existe perfil local.
+- Los viajes nuevos guardan `ownerLogin` con el email del usuario autenticado.
+- La pantalla de viajes observa solo `trips.ownerLogin = currentUser.login`.
+- Los eventos login/logout se insertan en `access_logs`.
+
+### Migracion
+
+Durante Sprint 03 se ha usado `fallbackToDestructiveMigration(false)` porque es un prototipo academico y no se requiere conservar bases antiguas de sprints previos. Para una entrega real, el siguiente paso seria declarar migraciones Room versionadas y exportar schema.
+
+### Tests
+
+La cobertura del Sprint 03 incluye unit tests JVM con Robolectric para:
+
+- DAOs y base de datos Room en memoria.
+- Filtrado de viajes por usuario autenticado.
+- CRUD persistente de viajes e itinerario.
+- Mapeo de perfil local.
+- ViewModels de auth, settings y trips.

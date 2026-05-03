@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material.icons.rounded.Gavel
@@ -38,7 +39,8 @@ import com.example.bbtraveling.ui.preview.PreviewScreenContainer
 fun SettingsScreen(
     onOpenPreferences: () -> Unit,
     onOpenAbout: () -> Unit,
-    onOpenTerms: () -> Unit
+    onOpenTerms: () -> Unit,
+    onLogout: () -> Unit
 ) {
     Scaffold(
         topBar = { TopAppBar(title = { Text(stringResource(R.string.title_settings)) }) }
@@ -82,6 +84,13 @@ fun SettingsScreen(
                 subtitle = stringResource(R.string.settings_terms_subtitle),
                 icon = Icons.Rounded.Gavel,
                 onClick = onOpenTerms
+            )
+
+            SettingActionCard(
+                title = stringResource(R.string.settings_logout),
+                subtitle = stringResource(R.string.settings_logout_subtitle),
+                icon = Icons.AutoMirrored.Rounded.Logout,
+                onClick = onLogout
             )
         }
     }
@@ -134,7 +143,8 @@ private fun SettingsScreenPreview() {
         SettingsScreen(
             onOpenPreferences = {},
             onOpenAbout = {},
-            onOpenTerms = {}
+            onOpenTerms = {},
+            onLogout = {}
         )
     }
 }
