@@ -12,8 +12,10 @@ import com.example.bbtraveling.domain.OperationResult
 import com.example.bbtraveling.domain.Photo
 import com.example.bbtraveling.domain.Trip
 import com.example.bbtraveling.domain.TripDraft
+import com.example.bbtraveling.domain.repository.AuthRepository
 import com.example.bbtraveling.domain.repository.TripRepository
 import com.example.bbtraveling.domain.validation.TravelValidator
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.time.Clock
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -25,6 +27,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -34,6 +38,7 @@ import kotlinx.coroutines.runBlocking
 class RoomTripRepository @Inject constructor(
     private val tripDao: TripDao,
     private val itineraryItemDao: ItineraryItemDao,
+    private val authRepository: AuthRepository,
     private val clock: Clock
 ) : TripRepository {
 
@@ -42,7 +47,15 @@ class RoomTripRepository @Inject constructor(
     private val seedPhotosByTripId: Map<String, List<Photo>> =
         MockData.initialTrips().associate { trip -> trip.id to trip.photos }
 
-    override val trips: StateFlow<List<Trip>> = tripDao.observeTripsWithActivities()
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override val trips: StateFlow<List<Trip>> = authRepository.currentUser
+        .flatMapLatest { user ->
+            if (user == null) {
+                flowOf(emptyList())
+            } else {
+                tripDao.observeTripsWithActivitiesForOwner(user.login)
+            }
+        }
         .map { entities -> entities.map(::toDomainTrip) }
         .stateIn(repositoryScope, SharingStarted.Eagerly, emptyList())
 
@@ -55,16 +68,23 @@ class RoomTripRepository @Inject constructor(
     override fun getTripById(tripId: String): Trip? = trips.value.firstOrNull { it.id == tripId }
 
     override fun addTrip(draft: TripDraft): OperationResult {
+        val ownerLogin = currentOwnerLogin()
+            ?: return OperationResult.Failure(message = ERROR_AUTH_REQUIRED)
         val errors = TravelValidator.validateTripDraft(
             draft = draft,
             today = today(),
             existingActivities = emptyList()
         )
         if (errors.isNotEmpty()) return OperationResult.Failure(fieldErrors = errors)
+        if (hasDuplicatedTripTitle(draft.title)) {
+            return OperationResult.Failure(
+                fieldErrors = mapOf(TravelValidator.FIELD_TITLE to TravelValidator.ERROR_TRIP_TITLE_DUPLICATED)
+            )
+        }
 
         val newTrip = TripEntity(
             id = UUID.randomUUID().toString(),
-            ownerLogin = null,
+            ownerLogin = ownerLogin,
             title = draft.title.trim(),
             description = draft.description.trim(),
             city = draft.city.trim(),
@@ -90,6 +110,8 @@ class RoomTripRepository @Inject constructor(
         draft: TripDraft,
         moveActivitiesWithTrip: Boolean
     ): OperationResult {
+        val ownerLogin = currentOwnerLogin()
+            ?: return OperationResult.Failure(message = ERROR_AUTH_REQUIRED)
         val currentTrip = getTripById(tripId)
             ?: return OperationResult.Failure(message = TravelValidator.ERROR_TRIP_NOT_FOUND)
 
@@ -105,10 +127,15 @@ class RoomTripRepository @Inject constructor(
             existingActivities = activitiesForValidation
         )
         if (errors.isNotEmpty()) return OperationResult.Failure(fieldErrors = errors)
+        if (hasDuplicatedTripTitle(draft.title, excludedTripId = tripId)) {
+            return OperationResult.Failure(
+                fieldErrors = mapOf(TravelValidator.FIELD_TITLE to TravelValidator.ERROR_TRIP_TITLE_DUPLICATED)
+            )
+        }
 
         val updatedTrip = TripEntity(
             id = currentTrip.id,
-            ownerLogin = null,
+            ownerLogin = ownerLogin,
             title = draft.title.trim(),
             description = draft.description.trim(),
             city = draft.city.trim(),
@@ -286,4 +313,18 @@ class RoomTripRepository @Inject constructor(
     }
 
     private fun today(): LocalDate = LocalDate.now(clock)
+
+    private fun currentOwnerLogin(): String? = authRepository.currentUser.value?.login
+
+    private fun hasDuplicatedTripTitle(title: String, excludedTripId: String? = null): Boolean {
+        val normalizedTitle = title.trim()
+        if (normalizedTitle.isBlank()) return false
+        return trips.value.any { trip ->
+            trip.id != excludedTripId && trip.title.equals(normalizedTitle, ignoreCase = true)
+        }
+    }
+
+    private companion object {
+        const val ERROR_AUTH_REQUIRED = "User must be logged in."
+    }
 }

@@ -2,6 +2,7 @@ package com.example.bbtraveling.navigation
 
 object Routes {
     const val Splash = "splash"
+    const val Auth = "auth"
     const val Main = "main"
 
     const val Home = "home"

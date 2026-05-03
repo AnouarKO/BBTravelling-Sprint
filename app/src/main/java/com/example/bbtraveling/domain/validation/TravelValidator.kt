@@ -35,6 +35,7 @@ object TravelValidator {
     const val ERROR_BUDGET_NEGATIVE = "error_budget_negative"
     const val ERROR_COST_REQUIRED = "error_cost_required"
     const val ERROR_COST_NEGATIVE = "error_cost_negative"
+    const val ERROR_TRIP_TITLE_DUPLICATED = "error_trip_title_duplicated"
     const val ERROR_ACTIVITY_DATE_FUTURE = "error_activity_date_future"
     const val ERROR_ACTIVITY_DATE_WITHIN_TRIP = "error_activity_date_within_trip"
     const val ERROR_TRIP_HAS_ACTIVITY_OUTSIDE_RANGE = "error_trip_has_activity_outside_range"

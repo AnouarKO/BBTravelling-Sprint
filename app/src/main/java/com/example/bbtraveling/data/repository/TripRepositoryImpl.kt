@@ -30,6 +30,11 @@ class TripRepositoryImpl(
             existingActivities = emptyList()
         )
         if (errors.isNotEmpty()) return OperationResult.Failure(fieldErrors = errors)
+        if (hasDuplicatedTripTitle(draft.title)) {
+            return OperationResult.Failure(
+                fieldErrors = mapOf(TravelValidator.FIELD_TITLE to TravelValidator.ERROR_TRIP_TITLE_DUPLICATED)
+            )
+        }
 
         val newTrip = Trip(
             id = UUID.randomUUID().toString(),
@@ -72,6 +77,11 @@ class TripRepositoryImpl(
             existingActivities = activitiesForValidation
         )
         if (errors.isNotEmpty()) return OperationResult.Failure(fieldErrors = errors)
+        if (hasDuplicatedTripTitle(draft.title, excludedTripId = tripId)) {
+            return OperationResult.Failure(
+                fieldErrors = mapOf(TravelValidator.FIELD_TITLE to TravelValidator.ERROR_TRIP_TITLE_DUPLICATED)
+            )
+        }
 
         val updatedTrip = currentTrip.copy(
             title = draft.title.trim(),
@@ -173,5 +183,13 @@ class TripRepositoryImpl(
 
     private fun buildDestination(city: String, country: String): String {
         return "${city.trim()}, ${country.trim()}"
+    }
+
+    private fun hasDuplicatedTripTitle(title: String, excludedTripId: String? = null): Boolean {
+        val normalizedTitle = title.trim()
+        if (normalizedTitle.isBlank()) return false
+        return trips.value.any { trip ->
+            trip.id != excludedTripId && trip.title.equals(normalizedTitle, ignoreCase = true)
+        }
     }
 }

@@ -24,6 +24,7 @@ fun errorMessageResId(errorCode: String): Int {
         TravelValidator.ERROR_BUDGET_NEGATIVE -> R.string.error_budget_negative
         TravelValidator.ERROR_COST_REQUIRED -> R.string.error_cost_required
         TravelValidator.ERROR_COST_NEGATIVE -> R.string.error_cost_negative
+        TravelValidator.ERROR_TRIP_TITLE_DUPLICATED -> R.string.error_trip_title_duplicated
         TravelValidator.ERROR_ACTIVITY_DATE_FUTURE -> R.string.error_activity_date_future
         TravelValidator.ERROR_ACTIVITY_DATE_WITHIN_TRIP -> R.string.error_activity_date_within_trip
         TravelValidator.ERROR_TRIP_HAS_ACTIVITY_OUTSIDE_RANGE -> R.string.error_trip_has_activity_outside_range

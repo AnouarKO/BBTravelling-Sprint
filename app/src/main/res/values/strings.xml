@@ -16,6 +16,10 @@
     <string name="title_about">About</string>
     <string name="title_terms">Terms &amp; Conditions</string>
     <string name="title_gallery">Gallery</string>
+    <string name="title_auth">Account access</string>
+    <string name="title_login">Log in</string>
+    <string name="title_register">Register</string>
+    <string name="title_recover_password">Recover password</string>
 
     <string name="tab_overview">Overview</string>
     <string name="tab_itinerary">Itinerary</string>
@@ -35,6 +39,11 @@
     <string name="action_open_terms">Open Terms &amp; Conditions</string>
     <string name="action_accept">Accept</string>
     <string name="action_reject">Reject</string>
+    <string name="action_login">Log in</string>
+    <string name="action_register">Register</string>
+    <string name="action_recover_password">Recover password</string>
+    <string name="action_send_recovery">Send recovery email</string>
+    <string name="action_back_to_login">Back to login</string>
 
     <string name="label_title">Title</string>
     <string name="label_description">Description</string>
@@ -51,6 +60,14 @@
     <string name="label_activity_template">Activity template</string>
     <string name="label_move_itinerary_with_trip">Move itinerary with trip dates</string>
     <string name="label_move_itinerary_with_trip_hint">Recommended when editing a trip that already has activities.</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_confirm_password">Confirm password</string>
+    <string name="label_username">Username</string>
+    <string name="label_birthdate_iso">Date of birth</string>
+    <string name="label_address">Address</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_receive_emails">I accept receiving emails</string>
 
     <string name="placeholder_select_date">Select date</string>
     <string name="placeholder_select_time">Select time</string>
@@ -74,6 +91,7 @@
     <string name="error_budget_negative">Budget cannot be negative.</string>
     <string name="error_cost_required">Cost is required.</string>
     <string name="error_cost_negative">Cost cannot be negative.</string>
+    <string name="error_trip_title_duplicated">A trip with this title already exists.</string>
     <string name="error_activity_date_future">Activity date must be in the future.</string>
     <string name="error_activity_date_within_trip">Activity date must be within the trip range.</string>
     <string name="error_trip_has_activity_outside_range">Expand the trip dates or move the itinerary with the trip.</string>
@@ -155,6 +173,33 @@
     <string name="settings_about_subtitle">Team, version and technical stack</string>
     <string name="settings_terms">Terms &amp; Conditions</string>
     <string name="settings_terms_subtitle">Read and review legal text</string>
+    <string name="settings_logout">Log out</string>
+    <string name="settings_logout_subtitle">Close the current Firebase session</string>
+    <string name="auth_subtitle">Use your verified Firebase account to access your trips.</string>
+    <string name="auth_need_account">Need an account?</string>
+    <string name="auth_have_account">Already registered?</string>
+    <string name="auth_recover_hint">Enter your email and we will send a password reset link.</string>
+    <string name="auth_register_hint">Create the Firebase account and local profile used by Sprint 03.</string>
+    <string name="auth_email_verification_hint">After registering, verify your email before logging in.</string>
+    <string name="auth_message_account_created_verify_email">Account created. Please verify your email before logging in.</string>
+    <string name="auth_message_password_recovery_sent">Password recovery email sent.</string>
+    <string name="auth_error_email_password_required">Email and password are required.</string>
+    <string name="auth_error_register_required">Email, password and username are required.</string>
+    <string name="auth_error_register_profile_required">Date of birth, address, country and phone are required.</string>
+    <string name="auth_error_email_required">Email is required.</string>
+    <string name="auth_error_invalid_email">Email address is not valid.</string>
+    <string name="auth_error_passwords_do_not_match">Passwords do not match.</string>
+    <string name="auth_error_email_not_verified">Email address not verified. Please check your email before continuing.</string>
+    <string name="auth_error_username_in_use">Username is already in use.</string>
+    <string name="auth_error_local_profile_not_found">No local profile was found for this account. Register from this app before logging in.</string>
+    <string name="auth_error_network">Network connection failed. Check the emulator internet connection and try again.</string>
+    <string name="auth_error_email_in_use">This email is already registered.</string>
+    <string name="auth_error_weak_password">Password is too weak.</string>
+    <string name="auth_error_invalid_credentials">Email or password is incorrect.</string>
+    <string name="auth_error_user_disabled">This account is disabled.</string>
+    <string name="auth_error_authentication_failed">Authentication failed.</string>
+    <string name="auth_error_registration_failed">Registration failed.</string>
+    <string name="auth_error_password_recovery_failed">Password recovery failed.</string>
     <string name="home_hero_title">Travel planning, simplified</string>
     <string name="home_hero_subtitle">%1$d trips loaded in mock mode</string>
     <string name="home_next_trip">Next trip</string>
@@ -169,7 +214,7 @@
     <string name="about_stack_title">Technical stack</string>
     <string name="about_stack_body">Kotlin, Jetpack Compose, Material 3 and Navigation Compose</string>
     <string name="about_version_title">Version</string>
-    <string name="about_version_body">Version 2.0.2 | namespace com.example.bbtraveling</string>
+    <string name="about_version_body">Version 3.0.0 | namespace com.example.bbtraveling</string>
     <string name="about_license_title">License</string>
     <string name="about_license_body">Academic mock project for classroom delivery</string>
     <string name="terms_notice_title">Mock legal notice</string>
@@ -179,11 +224,11 @@
     <string name="terms_content_title">2. Content</string>
     <string name="terms_content_body">Trips, prices, dates, transport, accommodation and images are fictional but plausible for presentation purposes.</string>
     <string name="terms_privacy_title">3. Privacy</string>
-    <string name="terms_privacy_body">This prototype does not store personal user data or connect to authentication services.</string>
+    <string name="terms_privacy_body">The app uses Firebase Authentication and stores the local profile needed for the academic prototype.</string>
     <string name="terms_acceptance_title">4. Acceptance</string>
     <string name="terms_acceptance_body">Using the prototype means you understand it is an academic mockup prepared for evaluation in March 2026.</string>
     <string name="splash_tagline">Built on Brotherhood. Driven by Adventure.</string>
-    <string name="splash_version_label">Version 2.0.2 | Sprint 02</string>
+    <string name="splash_version_label">Version 3.0.0 | Sprint 03</string>
 
     <string name="lang_english">English</string>
     <string name="lang_spanish">Spanish</string>

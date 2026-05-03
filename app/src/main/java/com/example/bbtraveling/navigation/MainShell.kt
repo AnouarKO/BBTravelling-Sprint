@@ -47,7 +47,8 @@ private data class BottomItem(
 fun MainShell(
     rootNavController: NavHostController,
     tripsViewModel: TripsViewModel,
-    settingsViewModel: SettingsViewModel
+    settingsViewModel: SettingsViewModel,
+    onLogout: () -> Unit
 ) {
     val mainNavController = rememberNavController()
     val trips by tripsViewModel.trips.collectAsState()
@@ -130,7 +131,8 @@ fun MainShell(
                 SettingsScreen(
                     onOpenPreferences = { mainNavController.navigateSingleTop(Routes.Preferences) },
                     onOpenAbout = { mainNavController.navigateSingleTop(Routes.About) },
-                    onOpenTerms = { rootNavController.navigate(Routes.Terms) }
+                    onOpenTerms = { rootNavController.navigate(Routes.Terms) },
+                    onLogout = onLogout
                 )
             }
             composable(Routes.Preferences) {

@@ -17,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.bbtraveling.navigation.AppNavGraph
 import com.example.bbtraveling.ui.theme.BBTravelingTheme
+import com.example.bbtraveling.ui.viewmodel.AuthViewModel
 import com.example.bbtraveling.ui.viewmodel.SettingsViewModel
 import com.example.bbtraveling.ui.viewmodel.TripsViewModel
 import com.example.bbtraveling.domain.repository.UserSettingsRepository
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
 @Composable
 private fun App(
+    authViewModel: AuthViewModel = hiltViewModel(),
     tripsViewModel: TripsViewModel = hiltViewModel(),
     settingsViewModel: SettingsViewModel = hiltViewModel()
 ) {
@@ -57,6 +59,7 @@ private fun App(
             val navController = rememberNavController()
             AppNavGraph(
                 navController = navController,
+                authViewModel = authViewModel,
                 tripsViewModel = tripsViewModel,
                 settingsViewModel = settingsViewModel
             )

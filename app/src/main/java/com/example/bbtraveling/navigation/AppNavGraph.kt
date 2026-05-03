@@ -8,16 +8,19 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.bbtraveling.ui.screens.AuthScreen
 import com.example.bbtraveling.ui.screens.GalleryScreen
 import com.example.bbtraveling.ui.screens.SplashScreen
 import com.example.bbtraveling.ui.screens.TermsScreen
 import com.example.bbtraveling.ui.screens.TripDetailScreen
+import com.example.bbtraveling.ui.viewmodel.AuthViewModel
 import com.example.bbtraveling.ui.viewmodel.SettingsViewModel
 import com.example.bbtraveling.ui.viewmodel.TripsViewModel
 
 @Composable
 fun AppNavGraph(
     navController: NavHostController,
+    authViewModel: AuthViewModel,
     tripsViewModel: TripsViewModel,
     settingsViewModel: SettingsViewModel
 ) {
@@ -28,13 +31,21 @@ fun AppNavGraph(
         composable(Routes.Splash) {
             SplashScreen(
                 onFinished = {
-                    val nextRoute = if (settingsViewModel.hasAcceptedTerms()) {
-                        Routes.Main
-                    } else {
-                        Routes.TermsOnboarding
-                    }
+                    val nextRoute = resolveStartRoute(settingsViewModel, authViewModel)
                     navController.navigate(nextRoute) {
                         popUpTo(Routes.Splash) { inclusive = true }
+                    }
+                }
+            )
+        }
+
+        composable(Routes.Auth) {
+            AuthScreen(
+                authViewModel = authViewModel,
+                onAuthenticated = {
+                    navController.navigate(Routes.Main) {
+                        popUpTo(Routes.Auth) { inclusive = true }
+                        launchSingleTop = true
                     }
                 }
             )
@@ -44,7 +55,14 @@ fun AppNavGraph(
             MainShell(
                 rootNavController = navController,
                 tripsViewModel = tripsViewModel,
-                settingsViewModel = settingsViewModel
+                settingsViewModel = settingsViewModel,
+                onLogout = {
+                    authViewModel.logout()
+                    navController.navigate(Routes.Auth) {
+                        popUpTo(Routes.Main) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
             )
         }
 
@@ -85,16 +103,29 @@ fun AppNavGraph(
             TermsScreen(
                 onAccept = {
                     settingsViewModel.acceptTerms()
-                    navController.navigate(Routes.Main) {
+                    val nextRoute = if (authViewModel.isAuthenticated()) Routes.Main else Routes.Auth
+                    navController.navigate(nextRoute) {
                         popUpTo(Routes.TermsOnboarding) { inclusive = true }
                     }
                 },
                 onReject = {
-                    navController.navigate(Routes.Main) {
+                    val nextRoute = if (authViewModel.isAuthenticated()) Routes.Main else Routes.Auth
+                    navController.navigate(nextRoute) {
                         popUpTo(Routes.TermsOnboarding) { inclusive = true }
                     }
                 }
             )
         }
+    }
+}
+
+private fun resolveStartRoute(
+    settingsViewModel: SettingsViewModel,
+    authViewModel: AuthViewModel
+): String {
+    return when {
+        !settingsViewModel.hasAcceptedTerms() -> Routes.TermsOnboarding
+        authViewModel.isAuthenticated() -> Routes.Main
+        else -> Routes.Auth
     }
 }

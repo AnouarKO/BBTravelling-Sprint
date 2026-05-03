@@ -8,6 +8,7 @@ import com.example.bbtraveling.domain.OperationResult
 import com.example.bbtraveling.domain.Trip
 import com.example.bbtraveling.domain.TripDraft
 import com.example.bbtraveling.domain.TripStatus
+import com.example.bbtraveling.domain.validation.TravelValidator
 import java.time.Clock
 import java.time.Instant
 import java.time.LocalDate
@@ -97,6 +98,29 @@ class TripRepositoryImplTest {
         result as OperationResult.Failure
         assertTrue(result.fieldErrors.containsKey("startDate"))
         assertTrue(result.fieldErrors.containsKey("endDate"))
+    }
+
+    @Test
+    fun addTrip_withDuplicatedTitle_returnsFieldError() {
+        val result = repository.addTrip(
+            TripDraft(
+                title = " seed trip ",
+                description = "Duplicate title",
+                city = "Madrid",
+                country = "Spain",
+                startDate = LocalDate.of(2026, 4, 10),
+                endDate = LocalDate.of(2026, 4, 12),
+                status = TripStatus.Upcoming,
+                budgetEur = 500.0
+            )
+        )
+
+        assertTrue(result is OperationResult.Failure)
+        result as OperationResult.Failure
+        assertEquals(
+            TravelValidator.ERROR_TRIP_TITLE_DUPLICATED,
+            result.fieldErrors[TravelValidator.FIELD_TITLE]
+        )
     }
 
     @Test
