@@ -2,20 +2,20 @@
 
 Final: `v3.0.0`
 
-El video se subira fuera del repositorio para mantener GitHub ligero, igual que en Sprint 02.
+El vídeo se subirá fuera del repositorio para mantener GitHub ligero, igual que en Sprint 02.
 
 Link:
-- PENDIENTE_DE_ANADIR
+- https://youtu.be/JuswyTpdHYg
 
-Contenido mostrado en el video:
+Contenido mostrado en el vídeo:
 - registro con Firebase Email/Password
-- validacion de campos obligatorios, edad minima de 18 anos y confirmacion de contrasena
-- mensaje de verificacion de email tras el registro
-- login solo despues de verificar el correo
+- validación de campos obligatorios, edad mínima de 18 años y confirmación de contraseña
+- mensaje de verificación de email tras el registro
+- login solo después de verificar el correo
 - persistencia de viajes con Room
 - logout y nuevo login
 - filtrado de viajes por usuario autenticado
-- recuperacion de contrasena
-- cambio de idioma y fondo antes de iniciar sesion
+- recuperación de contraseña
+- cambio de idioma y fondo antes de iniciar sesión
 - perfil local mostrado en Settings
-- ejecucion de `assembleDebug`, `testDebugUnitTest` (`46 tests`, `0 failures`, `0 errors`) y `lintDebug`
+- ejecución de `assembleDebug`, `testDebugUnitTest` (`46 tests`, `0 failures`, `0 errors`) y `lintDebug`

@@ -1,9 +1,9 @@
-# Sprint 01 - Decisiones de diseno
+# Sprint 01 - Decisiones de diseño
 
 ## 1. Objetivo
 
 Definir una base de app Travel Planner mock que sea:
-- Clara en navegacion
+- Clara en navegación
 - Coherente visualmente
 - Modular por capas
 - Escalable para Sprint 02
@@ -19,11 +19,11 @@ Estructura usada en el proyecto:
 - `data/`: datos mock hardcoded
 - `domain/`: entidades y funciones de negocio
 
-Esta separacion permite evolucionar UI y datos sin acoplamiento fuerte.
+Esta separación permite evolucionar UI y datos sin acoplamiento fuerte.
 
 ---
 
-## 3. Modelo de navegacion
+## 3. Modelo de navegación
 
 ### Root graph
 
@@ -205,7 +205,7 @@ Entidades principales:
 
 - `Trip`: agregado principal del viaje
 - `Activity`: item de itinerario con coste
-- `Photo`: item de galeria
+- `Photo`: item de galería
 
 Funciones de `Trip` en Sprint 01:
 
@@ -223,12 +223,12 @@ El diagrama de dominio detallado se mantiene en `docs/domain-model.mmd`.
 
 - Base visual Material 3
 - Identidad morado/amarillo
-- Tarjetas y jerarquia clara
-- Preferencias con idioma mock: `English`, `Espanol`, `Catalan`
+- Tarjetas y jerarquía clara
+- Preferencias con idioma mock: `English`, `Español`, `Català`
 
 ---
 
-## 7. Actualizacion Sprint 02 (Logic)
+## 7. Actualización Sprint 02 (Logic)
 
 Arquitectura implementada para el segundo sprint:
 
@@ -237,23 +237,23 @@ Arquitectura implementada para el segundo sprint:
 - `TripRepository` + `TripRepositoryImpl` para CRUD de viajes y actividades
 - `SharedPreferencesSettingsRepository` para persistir ajustes de usuario
 
-Se anadieron validaciones funcionales para:
+Se añadieron validaciones funcionales para:
 
 - campos obligatorios
 - fechas de viaje (inicio < fin y futuras)
 - fechas de actividad dentro del rango del viaje
 
-Ademas:
+Además:
 
-- Se aplico soporte multiidioma real (`en`, `es`, `ca`) con recursos por locale
-- Se añadieron logs de operaciones y errores de validacion para Logcat
+- Se aplicó soporte multiidioma real (`en`, `es`, `ca`) con recursos por locale
+- Se añadieron logs de operaciones y errores de validación para Logcat
 - Se incorporaron pruebas unitarias de CRUD y validaciones base
 
 ---
 
-## 8. Actualizacion Sprint 03 (Room, Hilt y Firebase)
+## 8. Actualización Sprint 03 (Room, Hilt y Firebase)
 
-La arquitectura de produccion queda como:
+La arquitectura de producción queda como:
 
 ```text
 Compose UI
@@ -262,9 +262,9 @@ Compose UI
   -> Room / Firebase / SharedPreferences
 ```
 
-### Inyeccion de dependencias
+### Inyección de dependencias
 
-Se usa Hilt como libreria DI:
+Se usa Hilt como librería DI:
 
 - `BBTravelingApplication` con `@HiltAndroidApp`.
 - `AppModule` provee `TravelDatabase`, DAOs, `FirebaseAuth` y `Clock`.
@@ -278,16 +278,16 @@ Tablas:
 
 - `users`
   - `login` como primary key.
-  - `username` unico.
+  - `username` único.
   - `birthdate`, `address`, `country`, `phone`, `acceptsReceiveEmails`.
 - `trips`
   - `id` como primary key.
   - `ownerLogin` referencia a `users.login`.
-  - campos de viaje: titulo, descripcion, ciudad, pais, fechas, estado, presupuesto, etc.
+  - campos de viaje: título, descripción, ciudad, país, fechas, estado, presupuesto, etc.
 - `itinerary_items`
   - `id` como primary key.
   - `tripId` referencia a `trips.id`.
-  - campos de actividad: titulo, descripcion, fecha, hora, categoria y coste.
+  - campos de actividad: título, descripción, fecha, hora, categoría y coste.
 - `access_logs`
   - `id` autogenerado.
   - `userId`, `eventType`, `occurredAt`.
@@ -302,27 +302,27 @@ trips.id    1 --- N itinerary_items.tripId
 ### Estrategia de uso
 
 - Al registrar un usuario, Firebase crea la cuenta y Room guarda el perfil local.
-- El registro valida todos los campos obligatorios, confirmacion de contrasena y edad minima de 18 anos.
-- Al hacer login, solo se acepta el usuario si el email esta verificado y existe perfil local.
+- El registro valida todos los campos obligatorios, confirmación de contraseña y edad mínima de 18 años.
+- Al hacer login, solo se acepta el usuario si el email está verificado y existe perfil local.
 - Los viajes nuevos guardan `ownerLogin` con el email del usuario autenticado.
 - La pantalla de viajes observa solo `trips.ownerLogin = currentUser.login`.
 - Los eventos login/logout se insertan en `access_logs`.
 
-### Migracion
+### Migración
 
-Durante Sprint 03 se ha usado `fallbackToDestructiveMigration(false)` porque es un prototipo academico y no se requiere conservar bases antiguas de sprints previos. Para una entrega real, el siguiente paso seria declarar migraciones Room versionadas y exportar schema.
+Durante Sprint 03 se ha usado `fallbackToDestructiveMigration(false)` porque es un prototipo académico y no se requiere conservar bases antiguas de sprints previos. Para una entrega real, el siguiente paso sería declarar migraciones Room versionadas y exportar schema.
 
 ### Tests
 
 La cobertura del Sprint 03 incluye unit tests JVM con Robolectric para:
 
-- `ExampleUnitTest`: entorno basico.
-- `TripTest`: calculos de dominio.
-- `TripRepositoryImplTest`: CRUD in-memory, validaciones y titulo duplicado.
+- `ExampleUnitTest`: entorno básico.
+- `TripTest`: cálculos de dominio.
+- `TripRepositoryImplTest`: CRUD in-memory, validaciones y título duplicado.
 - `TravelDatabaseTest`: Room Database, DAOs y relaciones.
 - `RoomTripRepositoryTest`: CRUD persistente y filtrado por usuario autenticado.
-- `RoomUserProfileRepositoryTest`: mapeo y observacion de perfil local.
-- `AuthViewModelTest`: login, registro, recover password, confirmacion de password y edad minima.
+- `RoomUserProfileRepositoryTest`: mapeo y observación de perfil local.
+- `AuthViewModelTest`: login, registro, recover password, confirmación de password y edad mínima.
 - `SettingsViewModelTest`: perfil autenticado, idioma, tema y preferencias sin cuenta.
-- `TripsViewModelTest`: carga, creacion y validaciones desde ViewModel.
+- `TripsViewModelTest`: carga, creación y validaciones desde ViewModel.
 - `MainDispatcherRule`: soporte para corrutinas en tests.

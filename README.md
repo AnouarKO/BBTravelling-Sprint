@@ -1,21 +1,22 @@
 # BBTraveling
 
-Proyecto Android de planificacion de viajes para la asignatura **Applications for Mobile Devices**.
+Proyecto Android de planificación de viajes para la asignatura **Applications for Mobile Devices**.
 
-Version actual: `3.0.0`  
+Versión actual: `3.0.0`
+
 Sprint actual: `Sprint 03`
 
 ## Estado del proyecto
 
-La version actual implementa los requisitos principales del `LAB_SPRINT03`:
+La versión actual implementa los requisitos principales del `LAB_SPRINT03`:
 
 - Persistencia de viajes e itinerario con SQLite usando Room.
-- Sustitucion del almacenamiento in-memory en produccion por `RoomTripRepository`.
+- Sustitución del almacenamiento in-memory en producción por `RoomTripRepository`.
 - Arquitectura Repository mantenida.
-- Hilt configurado como libreria de inyeccion de dependencias.
+- Hilt configurado como librería de inyección de dependencias.
 - Firebase Authentication con email/password.
-- Registro, login, logout y recuperacion de contrasena.
-- Verificacion de email antes de permitir el acceso.
+- Registro, login, logout y recuperación de contraseña.
+- Verificación de email antes de permitir el acceso.
 - Perfil local de usuario persistido en Room.
 - Viajes asociados al usuario autenticado y filtrados por cuenta.
 - Registro local de accesos login/logout.
@@ -34,13 +35,13 @@ UI (Compose Screens)
 
 Piezas principales:
 
-- `AuthViewModel`: coordina login, registro, recuperacion y logout.
+- `AuthViewModel`: coordina login, registro, recuperación y logout.
 - `TripsViewModel`: coordina CRUD de viajes e itinerario.
 - `SettingsViewModel`: combina ajustes globales con el perfil local del usuario autenticado.
 - `FirebaseAuthRepository`: encapsula Firebase Auth y logs de acceso.
 - `RoomTripRepository`: CRUD persistente de viajes e itinerario con Room.
 - `RoomUserProfileRepository`: acceso al perfil local del usuario.
-- `SharedPreferencesSettingsRepository`: idioma, tema y aceptacion de terminos.
+- `SharedPreferencesSettingsRepository`: idioma, tema y aceptación de términos.
 
 ## Persistencia local
 
@@ -55,15 +56,15 @@ Room usa la base de datos `bbtraveling.db` con estas tablas:
 
 El proyecto usa Firebase Authentication con proveedor Email/Password.
 
-El archivo `app/google-services.json` es necesario en local, pero no se sube al repositorio porque esta incluido en `.gitignore`.
+El archivo `app/google-services.json` es necesario en local, pero no se sube al repositorio porque está incluido en `.gitignore`.
 
 Flujo implementado:
 
 1. El usuario se registra con email, password y perfil local.
-2. Firebase envia email de verificacion.
-3. La app vuelve a la pantalla de login y muestra el aviso de verificacion.
-4. El login solo permite entrar si el email esta verificado.
-5. Logout cierra la sesion y registra el acceso.
+2. Firebase envía email de verificación.
+3. La app vuelve a la pantalla de login y muestra el aviso de verificación.
+4. El login solo permite entrar si el email está verificado.
+5. Logout cierra la sesión y registra el acceso.
 
 ## Validaciones
 
@@ -72,10 +73,10 @@ Flujo implementado:
 - Fecha de inicio anterior a fecha final.
 - Actividades dentro del rango del viaje.
 - Presupuesto y coste no negativos.
-- Titulo de viaje no duplicado para el usuario.
-- Username unico antes del registro.
-- Registro permitido solo para usuarios de 18 anos o mas.
-- Email valido y mensajes de error localizados.
+- Título de viaje no duplicado para el usuario.
+- Username único antes del registro.
+- Registro permitido solo para usuarios de 18 años o más.
+- Email válido y mensajes de error localizados.
 
 ## Idiomas
 
@@ -87,26 +88,26 @@ Los textos se gestionan con recursos Android:
 
 Idiomas disponibles:
 
-- Ingles
+- Inglés
 - Castellano
-- Catalan
+- Catalán
 
 ## Tests
 
-La suite de unit tests que se ejecuta con `:app:testDebugUnitTest` incluye `46 tests`, con `0 failures` y `0 errors` en la verificacion local.
+La suite de unit tests que se ejecuta con `:app:testDebugUnitTest` incluye `46 tests`, con `0 failures` y `0 errors` en la verificación local.
 
 - `ExampleUnitTest`: test base de entorno.
-- `TripTest`: calculos de dominio del viaje.
-- `TripRepositoryImplTest`: CRUD in-memory, validaciones y titulo duplicado.
-- `TravelDatabaseTest`: Room Database, DAOs, relaciones y persistencia basica.
+- `TripTest`: cálculos de dominio del viaje.
+- `TripRepositoryImplTest`: CRUD in-memory, validaciones y título duplicado.
+- `TravelDatabaseTest`: Room Database, DAOs, relaciones y persistencia básica.
 - `RoomTripRepositoryTest`: CRUD persistente, filtrado por usuario y validaciones de trips.
-- `RoomUserProfileRepositoryTest`: persistencia y observacion del perfil local.
-- `AuthViewModelTest`: login, registro, recuperacion, email verification, confirmacion de password y edad minima.
+- `RoomUserProfileRepositoryTest`: persistencia y observación del perfil local.
+- `AuthViewModelTest`: login, registro, recuperación, email verification, confirmación de password y edad mínima.
 - `SettingsViewModelTest`: perfil local autenticado, idioma, tema y preferencias sin usuario.
-- `TripsViewModelTest`: carga, creacion y validaciones desde ViewModel.
+- `TripsViewModelTest`: carga, creación y validaciones desde ViewModel.
 - `MainDispatcherRule`: regla de soporte para tests con corrutinas.
 
-Comandos de verificacion:
+Comandos de verificación:
 
 ```powershell
 ./gradlew.bat :app:assembleDebug --console=plain
