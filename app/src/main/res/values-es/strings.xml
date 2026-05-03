@@ -44,6 +44,8 @@
     <string name="action_recover_password">Recuperar contraseña</string>
     <string name="action_send_recovery">Enviar correo de recuperación</string>
     <string name="action_back_to_login">Volver al inicio de sesión</string>
+    <string name="action_dark_background">Fondo oscuro</string>
+    <string name="action_light_background">Fondo claro</string>
 
     <string name="label_title">Título</string>
     <string name="label_description">Descripción</string>
@@ -184,7 +186,7 @@
     <string name="auth_message_account_created_verify_email">Cuenta creada. Verifica tu correo electrónico antes de iniciar sesión.</string>
     <string name="auth_message_password_recovery_sent">Se ha enviado el correo de recuperación de contraseña.</string>
     <string name="auth_error_email_password_required">El correo electrónico y la contraseña son obligatorios.</string>
-    <string name="auth_error_register_required">El correo electrónico, la contraseña y el nombre de usuario son obligatorios.</string>
+    <string name="auth_error_register_required">Todos los campos son obligatorios.</string>
     <string name="auth_error_email_required">El correo electrónico es obligatorio.</string>
     <string name="auth_error_invalid_email">La dirección de correo electrónico no es válida.</string>
     <string name="auth_error_passwords_do_not_match">Las dos contraseñas no coinciden.</string>
@@ -232,5 +234,4 @@
     <string name="lang_english">Inglés</string>
     <string name="lang_spanish">Español</string>
     <string name="lang_catalan">Catalán</string>
-    <string name="auth_error_register_profile_required">La fecha de nacimiento, la dirección, el país y el teléfono son obligatorios.</string>
 </resources>

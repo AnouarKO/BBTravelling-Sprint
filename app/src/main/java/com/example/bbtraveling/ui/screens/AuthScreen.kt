@@ -41,7 +41,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.bbtraveling.R
+import com.example.bbtraveling.domain.UserSettings
 import com.example.bbtraveling.ui.viewmodel.AuthViewModel
+import com.example.bbtraveling.ui.viewmodel.SettingsViewModel
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
@@ -57,9 +59,11 @@ private enum class AuthMode {
 @Composable
 fun AuthScreen(
     authViewModel: AuthViewModel,
+    settingsViewModel: SettingsViewModel,
     onAuthenticated: () -> Unit
 ) {
     val uiState by authViewModel.uiState.collectAsState()
+    val settings by settingsViewModel.settings.collectAsState()
     var mode by remember { mutableStateOf(AuthMode.Login) }
 
     var email by remember { mutableStateOf("") }
@@ -131,6 +135,12 @@ fun AuthScreen(
                     )
                 }
             }
+
+            GuestSettingsControls(
+                settings = settings,
+                onLanguageChange = settingsViewModel::updateLanguage,
+                onDarkModeChange = settingsViewModel::updateDarkMode
+            )
 
             AuthStatusMessage(
                 message = localError ?: uiState.error,
@@ -299,6 +309,69 @@ fun AuthScreen(
                     }
                 )
             }
+        }
+    }
+}
+
+@Composable
+private fun GuestSettingsControls(
+    settings: UserSettings,
+    onLanguageChange: (String) -> Unit,
+    onDarkModeChange: (Boolean) -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            LanguageButton(
+                label = stringResource(R.string.lang_english),
+                selected = settings.languageTag == "en",
+                onClick = { onLanguageChange("en") },
+                modifier = Modifier.weight(1f)
+            )
+            LanguageButton(
+                label = stringResource(R.string.lang_spanish),
+                selected = settings.languageTag == "es",
+                onClick = { onLanguageChange("es") },
+                modifier = Modifier.weight(1f)
+            )
+            LanguageButton(
+                label = stringResource(R.string.lang_catalan),
+                selected = settings.languageTag == "ca",
+                onClick = { onLanguageChange("ca") },
+                modifier = Modifier.weight(1f)
+            )
+        }
+        OutlinedButton(
+            onClick = { onDarkModeChange(!settings.darkMode) },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                if (settings.darkMode) {
+                    stringResource(R.string.action_light_background)
+                } else {
+                    stringResource(R.string.action_dark_background)
+                }
+            )
+        }
+    }
+}
+
+@Composable
+private fun LanguageButton(
+    label: String,
+    selected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    if (selected) {
+        Button(onClick = onClick, modifier = modifier) {
+            Text(label)
+        }
+    } else {
+        OutlinedButton(onClick = onClick, modifier = modifier) {
+            Text(label)
         }
     }
 }

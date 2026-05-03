@@ -5,7 +5,6 @@ object AuthMessages {
     const val PASSWORD_RECOVERY_SENT = "auth_message_password_recovery_sent"
     const val EMAIL_PASSWORD_REQUIRED = "auth_error_email_password_required"
     const val REGISTER_REQUIRED = "auth_error_register_required"
-    const val REGISTER_PROFILE_REQUIRED = "auth_error_register_profile_required"
     const val EMAIL_REQUIRED = "auth_error_email_required"
     const val INVALID_EMAIL = "auth_error_invalid_email"
     const val PASSWORDS_DO_NOT_MATCH = "auth_error_passwords_do_not_match"

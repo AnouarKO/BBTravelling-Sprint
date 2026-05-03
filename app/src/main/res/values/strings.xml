@@ -44,6 +44,8 @@
     <string name="action_recover_password">Recover password</string>
     <string name="action_send_recovery">Send recovery email</string>
     <string name="action_back_to_login">Back to login</string>
+    <string name="action_dark_background">Dark background</string>
+    <string name="action_light_background">Light background</string>
 
     <string name="label_title">Title</string>
     <string name="label_description">Description</string>
@@ -184,8 +186,7 @@
     <string name="auth_message_account_created_verify_email">Account created. Please verify your email before logging in.</string>
     <string name="auth_message_password_recovery_sent">Password recovery email sent.</string>
     <string name="auth_error_email_password_required">Email and password are required.</string>
-    <string name="auth_error_register_required">Email, password and username are required.</string>
-    <string name="auth_error_register_profile_required">Date of birth, address, country and phone are required.</string>
+    <string name="auth_error_register_required">All fields are required.</string>
     <string name="auth_error_email_required">Email is required.</string>
     <string name="auth_error_invalid_email">Email address is not valid.</string>
     <string name="auth_error_passwords_do_not_match">Passwords do not match.</string>

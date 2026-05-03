@@ -96,16 +96,18 @@ class AuthViewModel @Inject constructor(
         phone: String,
         acceptsReceiveEmails: Boolean
     ) {
-        if (email.isBlank() || password.isBlank() || username.isBlank()) {
+        if (
+            email.isBlank() ||
+            password.isBlank() ||
+            confirmPassword.isBlank() ||
+            username.isBlank() ||
+            birthdate == null ||
+            address.isBlank() ||
+            country.isBlank() ||
+            phone.isBlank()
+        ) {
             _uiState.value = _uiState.value.copy(
                 error = AuthMessages.REGISTER_REQUIRED.localizedAuthMessage(),
-                message = null
-            )
-            return
-        }
-        if (birthdate == null || address.isBlank() || country.isBlank() || phone.isBlank()) {
-            _uiState.value = _uiState.value.copy(
-                error = AuthMessages.REGISTER_PROFILE_REQUIRED.localizedAuthMessage(),
                 message = null
             )
             return
@@ -222,7 +224,6 @@ class AuthViewModel @Inject constructor(
             AuthMessages.PASSWORD_RECOVERY_SENT -> R.string.auth_message_password_recovery_sent
             AuthMessages.EMAIL_PASSWORD_REQUIRED -> R.string.auth_error_email_password_required
             AuthMessages.REGISTER_REQUIRED -> R.string.auth_error_register_required
-            AuthMessages.REGISTER_PROFILE_REQUIRED -> R.string.auth_error_register_profile_required
             AuthMessages.EMAIL_REQUIRED -> R.string.auth_error_email_required
             AuthMessages.INVALID_EMAIL -> R.string.auth_error_invalid_email
             AuthMessages.PASSWORDS_DO_NOT_MATCH -> R.string.auth_error_passwords_do_not_match

@@ -44,6 +44,8 @@
     <string name="action_recover_password">Recuperar contrasenya</string>
     <string name="action_send_recovery">Enviar correu de recuperació</string>
     <string name="action_back_to_login">Tornar a l\'inici de sessió</string>
+    <string name="action_dark_background">Fons fosc</string>
+    <string name="action_light_background">Fons clar</string>
 
     <string name="label_title">Títol</string>
     <string name="label_description">Descripció</string>
@@ -184,7 +186,7 @@
     <string name="auth_message_account_created_verify_email">Compte creat. Verifica el correu electrònic abans d\'iniciar sessió.</string>
     <string name="auth_message_password_recovery_sent">S\'ha enviat el correu de recuperació de contrasenya.</string>
     <string name="auth_error_email_password_required">El correu electrònic i la contrasenya són obligatoris.</string>
-    <string name="auth_error_register_required">El correu electrònic, la contrasenya i el nom d\'usuari són obligatoris.</string>
+    <string name="auth_error_register_required">Tots els camps són obligatoris.</string>
     <string name="auth_error_email_required">El correu electrònic és obligatori.</string>
     <string name="auth_error_invalid_email">L\'adreça de correu electrònic no és vàlida.</string>
     <string name="auth_error_passwords_do_not_match">Les dues contrasenyes no coincideixen.</string>
@@ -232,5 +234,4 @@
     <string name="lang_english">Anglès</string>
     <string name="lang_spanish">Espanyol</string>
     <string name="lang_catalan">Català</string>
-    <string name="auth_error_register_profile_required">La data de naixement, l\'adreça, el país i el telèfon són obligatoris.</string>
 </resources>

@@ -42,6 +42,7 @@ fun AppNavGraph(
         composable(Routes.Auth) {
             AuthScreen(
                 authViewModel = authViewModel,
+                settingsViewModel = settingsViewModel,
                 onAuthenticated = {
                     navController.navigate(Routes.Main) {
                         popUpTo(Routes.Auth) { inclusive = true }

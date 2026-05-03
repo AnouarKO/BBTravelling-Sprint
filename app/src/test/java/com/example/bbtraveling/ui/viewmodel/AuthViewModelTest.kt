@@ -132,7 +132,7 @@ class AuthViewModelTest {
         )
 
         assertEquals(
-            context.getString(R.string.auth_error_register_profile_required),
+            context.getString(R.string.auth_error_register_required),
             viewModel.uiState.value.error
         )
         assertNull(repository.lastRegistration)
